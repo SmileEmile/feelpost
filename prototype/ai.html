@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FeelPost · AI 模块原型</title>
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/ai.css" />
+  <script>
+    (function () {
+      try {
+        var d = JSON.parse(localStorage.getItem('feelpost.ai.prototype') || '{}');
+        if (d.theme) document.documentElement.dataset.theme = d.theme;
+      } catch (e) { /* noop */ }
+    })();
+  </script>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <a class="brand" href="index.html" title="返回项目列表">
+        <span class="brand-mark">{ }</span>
+        <span class="brand-name">FeelPost</span>
+      </a>
+      <div class="topbar-center">
+        <button class="picker" type="button"><span class="lbl">项目</span><b>api-test-service</b></button>
+        <button class="picker" type="button"><span class="lbl">环境</span><span class="chip ok soft">本地</span><code>http://localhost:8080</code></button>
+      </div>
+      <div class="topbar-right">
+        <span class="ai-status"><span class="ai-status-dot"></span> AI 已就绪</span>
+        <button class="btn btn-primary scan-btn" type="button">扫描代码仓库</button>
+        <button class="icon-btn" type="button" data-action="theme" aria-label="切换主题" id="theme-btn"></button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <nav class="rail" id="rail" aria-label="主导航"></nav>
+      <aside class="sidebar" id="sidebar"></aside>
+      <main class="main" id="main"></main>
+    </div>
+  </div>
+
+  <div id="toast-root"></div>
+  <div id="modal-root"></div>
+
+  <script src="assets/js/util.js"></script>
+  <script src="assets/js/ui.js"></script>
+  <script src="assets/js/ai-prototype.js"></script>
+</body>
+</html>

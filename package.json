@@ -1,0 +1,43 @@
+{
+  "name": "feelpost",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local API contract hub: scan Spring Boot sources, debug, export docs for AI front-end.",
+  "main": "./out/main/index.js",
+  "author": "feelpost",
+  "license": "UNLICENSED",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "preview": "electron-vite preview",
+    "typecheck": "tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.web.json",
+    "test": "vitest run",
+    "pack": "electron-vite build && node scripts/pack.mjs",
+    "dist": "electron-vite build && electron-builder",
+    "dist:mac": "electron-vite build && electron-builder --mac --arm64 --x64",
+    "dist:win": "electron-vite build && electron-builder --win --x64",
+    "dist:mac:arm64": "electron-vite build && electron-builder --mac --arm64 -c.electronDist=node_modules/electron/dist"
+  },
+  "dependencies": {
+    "electron-log": "^5.2.4",
+    "undici": "^6.21.0",
+    "web-tree-sitter": "^0.25.10",
+    "zod": "^3.24.1",
+    "zustand": "^4.5.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8",
+    "electron-vite": "^2.3.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "typescript": "^5.7.2",
+    "vite": "^5.4.11",
+    "vitest": "^2.1.8"
+  },
+  "productName": "FeelPost"
+}

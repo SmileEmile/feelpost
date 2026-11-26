@@ -1,0 +1,11 @@
+node_modules/
+out/
+dist/
+release/
+.tools/
+.npm-cache/
+.shot/
+*.log
+.DS_Store
+.electron-cache/
+.tmp-*

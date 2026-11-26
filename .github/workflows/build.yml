@@ -1,0 +1,39 @@
+name: build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  mac:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npx electron-builder --mac --arm64 --x64
+      - uses: actions/upload-artifact@v4
+        with:
+          name: feelpost-mac
+          path: |
+            release/*.dmg
+            release/*.zip
+
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npx electron-builder --win --x64
+      - uses: actions/upload-artifact@v4
+        with:
+          name: feelpost-windows
+          path: release/*.exe

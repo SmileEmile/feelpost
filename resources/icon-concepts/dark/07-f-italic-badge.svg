@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#16253b"/>
+      <stop offset=".55" stop-color="#0d1728"/>
+      <stop offset="1" stop-color="#08101b"/>
+    </linearGradient>
+    <linearGradient id="cobalt" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3b82f6"/>
+      <stop offset="1" stop-color="#1d4ed8"/>
+    </linearGradient>
+  </defs>
+  <rect x="52" y="52" width="920" height="920" rx="220" fill="url(#tile)"/>
+  <rect x="82" y="82" width="860" height="860" rx="195" fill="none" stroke="#2a3d58" stroke-width="3"/>
+
+  <circle cx="512" cy="512" r="306" fill="url(#cobalt)"/>
+  <circle cx="512" cy="512" r="306" fill="none" stroke="#93c5fd" stroke-opacity=".3" stroke-width="3"/>
+  <path d="M388 330h250M388 330L338 694M368 525h246" fill="none" stroke="#ffffff" stroke-width="92" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M586 468l68 57-68 57" fill="none" stroke="#5fd6a8" stroke-width="54" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

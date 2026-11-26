@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FeelPost · 工作台</title>
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <script>
+    (function () {
+      try {
+        var s = localStorage.getItem('feelpost.prototype.v1');
+        if (s) {
+          var d = JSON.parse(s);
+          if (d.theme) document.documentElement.dataset.theme = d.theme;
+        }
+      } catch (e) { /* noop */ }
+    })();
+  </script>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <a class="brand" href="index.html" title="返回项目列表">
+        <span class="brand-mark">{ }</span>
+        <span class="brand-name">FeelPost</span>
+      </a>
+      <div class="topbar-center">
+        <button class="picker" data-act="project-menu" id="project-picker" aria-haspopup="menu"></button>
+        <button class="picker" data-act="env-menu" id="env-picker" aria-haspopup="menu"></button>
+      </div>
+      <div class="topbar-right">
+        <span class="small-note scan-meta" id="scan-meta"></span>
+        <button class="btn btn-primary scan-btn" data-act="scan" id="scan-btn"></button>
+        <button class="icon-btn" data-act="theme" id="theme-btn" title="切换主题" aria-label="切换主题"></button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <nav class="rail" id="rail" aria-label="主导航"></nav>
+      <aside class="sidebar" id="sidebar"></aside>
+      <main class="main" id="main"></main>
+    </div>
+  </div>
+
+  <div id="toast-root"></div>
+  <div id="modal-root"></div>
+
+  <script src="assets/js/util.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/store.js"></script>
+  <script src="assets/js/ui.js"></script>
+  <script src="assets/js/view-workspace.js"></script>
+  <script src="assets/js/view-cases.js"></script>
+  <script src="assets/js/view-docs.js"></script>
+  <script src="assets/js/view-envs.js"></script>
+  <script src="assets/js/view-settings.js"></script>
+  <script src="assets/js/app-core.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
