@@ -24,9 +24,9 @@ FeelPost 是一个运行在本机的桌面工具，用来把 Spring Boot 后端�
 
 ## 截图
 
-| 接口调试 | 用例管理 | 文档导出 |
+| 接口调试 | 用例管理 | 环境配置 |
 | --- | --- | --- |
-| ![接口调试](docs/design/assets/workspace-scan.png) | ![用例管理](docs/design/assets/cases-workspace.png) | ![文档导出](docs/design/assets/docs-workspace.png) |
+| ![接口调试](docs/design/assets/workspace-scan.png) | ![用例管理](docs/design/assets/cases-workspace.png) | ![文档导出](docs/design/assets/hjpz.png) |
 
 ## 核心能力
 
