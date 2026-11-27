@@ -1,7 +1,7 @@
 import { promises as fs } from 'node:fs'
 import http from 'node:http'
 import { join } from 'node:path'
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, Menu } from 'electron'
 import log from 'electron-log/main'
 import { registerIpc } from './ipc/register'
 import { SettingsService } from './services/settings-service'
@@ -25,6 +25,7 @@ function createWindow(): void {
     show: false,
     backgroundColor: '#eef1f6',
     title: 'FeelPost',
+    autoHideMenuBar: process.platform !== 'darwin',
     ...(process.platform === 'darwin'
       ? { titleBarStyle: 'hiddenInset' as const, trafficLightPosition: { x: 16, y: 20 } }
       : {}),
@@ -381,6 +382,9 @@ app.whenReady().then(async () => {
   log.transports.file.resolvePathFn = () =>
     join(process.env.FEELPOST_LOG_DIR || join(app.getPath('userData'), 'logs'), 'main.log')
   log.info('FeelPost starting', { dataDir })
+  // Windows/Linux do not need the default Electron File/Edit/View menu.
+  // Keep the native application menu on macOS for standard app shortcuts.
+  if (process.platform !== 'darwin') Menu.setApplicationMenu(null)
   const grammarPath = app.isPackaged
     ? join(process.resourcesPath, 'grammars', 'java.wasm')
     : join(process.cwd(), 'resources', 'grammars', 'java.wasm')
