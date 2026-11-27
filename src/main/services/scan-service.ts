@@ -104,6 +104,7 @@ export class ScanService {
   }
 
   private workerPath(): string {
+    if (process.env.FEELPOST_SCAN_WORKER) return process.env.FEELPOST_SCAN_WORKER
     const path = join(__dirname, 'scan-worker.js')
     return path.includes('app.asar') ? path.replace('app.asar', 'app.asar.unpacked') : path
   }

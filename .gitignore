@@ -10,3 +10,5 @@ release/
 .electron-cache/
 .tmp-*
 release-notes.md
+
+.demo-data/

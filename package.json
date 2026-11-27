@@ -18,7 +18,9 @@
     "dist:win": "electron-vite build && electron-builder --win --x64 --publish never",
     "dist:mac:arm64": "electron-vite build && electron-builder --mac --arm64 -c.electronDist=node_modules/electron/dist --publish never",
     "release:notes": "node scripts/release-notes.mjs",
-    "release:check": "node scripts/release-notes.mjs"
+    "release:check": "node scripts/release-notes.mjs",
+    "demo:seed": "electron-vite build && vite-node -c vite.demo.config.ts scripts/seed-demo.ts",
+    "demo:dev": "node scripts/demo-dev.mjs"
   },
   "dependencies": {
     "electron-log": "^5.2.4",
