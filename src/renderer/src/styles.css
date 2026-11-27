@@ -2695,3 +2695,10 @@ html[data-platform="darwin"] .onboarding-top { padding-left: 80px; }
 .ai-model-select { flex: 1; width: auto; min-width: 220px; }
 .ai-model-select .theme-select-trigger { width: 100%; }
 .ai-model-error { flex-basis: 100%; color: var(--danger); font-size: 10.5px; }
+
+.provider-logo {
+  width: 18px; height: 18px; flex: none;
+  display: inline-grid; place-items: center; overflow: hidden;
+}
+.provider-logo svg { width: 16px !important; height: 16px !important; display: block; }
+.provider-logo svg path { fill: currentColor; }

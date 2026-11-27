@@ -3,6 +3,16 @@ import type { AIConfig, AIConfigPublic, AppInfo, Preferences } from '@shared/con
 import { unwrap } from './api'
 import Message from './Message'
 import SelectMenu from './SelectMenu'
+import openaiIcon from '../../../resources/icon-ai/openai.svg?raw'
+import claudeIcon from '../../../resources/icon-ai/claude.svg?raw'
+import geminiIcon from '../../../resources/icon-ai/gemini.svg?raw'
+import deepseekIcon from '../../../resources/icon-ai/deepseek.svg?raw'
+import qwenIcon from '../../../resources/icon-ai/qwen.svg?raw'
+import zhipuIcon from '../../../resources/icon-ai/zhipu.svg?raw'
+import minimaxIcon from '../../../resources/icon-ai/minimax.svg?raw'
+import kimiIcon from '../../../resources/icon-ai/kimi.svg?raw'
+import ollamaIcon from '../../../resources/icon-ai/ollama.svg?raw'
+import openrouterIcon from '../../../resources/icon-ai/openrouter.svg?raw'
 
 interface AIProviderPreset {
   id: string
@@ -12,28 +22,36 @@ interface AIProviderPreset {
   mark: string
   color: string
   section: string
+  icon?: string
 }
 
 const AI_PROVIDERS: AIProviderPreset[] = [
-  { id: 'deepseek', label: 'DeepSeek', baseUrl: 'https://api.deepseek.com/v1', model: 'deepseek-v4-flash', mark: 'D', color: '#4d6bfe', section: '国内模型' },
-  { id: 'qwen', label: '通义千问', baseUrl: 'https://dashscope.aliyuncs.com/compatible-mode/v1', model: 'qwen-plus', mark: 'Q', color: '#615ced', section: '国内模型' },
-  { id: 'zhipu', label: '智谱 GLM', baseUrl: 'https://open.bigmodel.cn/api/paas/v4', model: 'glm-4-flash', mark: 'Z', color: '#2f6bff', section: '国内模型' },
-  { id: 'kimi', label: 'Kimi', baseUrl: 'https://api.moonshot.cn/v1', model: 'moonshot-v1-8k', mark: 'K', color: '#111827', section: '国内模型' },
-  { id: 'siliconflow', label: 'SiliconFlow', baseUrl: 'https://api.siliconflow.cn/v1', model: 'deepseek-ai/DeepSeek-V3', mark: 'S', color: '#7c3aed', section: '国内模型' },
-  { id: 'ollama', label: 'Ollama（本地）', baseUrl: 'http://localhost:11434/v1', model: 'llama3.2', mark: 'L', color: '#374151', section: '本地' },
-  { id: 'openai', label: 'OpenAI', baseUrl: 'https://api.openai.com/v1', model: 'gpt-4o-mini', mark: 'O', color: '#10a37f', section: '国外模型' },
-  { id: 'anthropic', label: 'Anthropic Claude', baseUrl: 'https://api.anthropic.com/v1', model: 'claude-sonnet-4-20250514', mark: 'A', color: '#d97757', section: '国外模型' },
-  { id: 'gemini', label: 'Google Gemini', baseUrl: 'https://generativelanguage.googleapis.com/v1beta/openai', model: 'gemini-2.0-flash', mark: 'G', color: '#4285f4', section: '国外模型' },
-  { id: 'openrouter', label: 'OpenRouter', baseUrl: 'https://openrouter.ai/api/v1', model: 'openai/gpt-4o-mini', mark: 'R', color: '#111827', section: '国外模型' }
+  { id: 'deepseek', icon: deepseekIcon, label: 'DeepSeek', baseUrl: 'https://api.deepseek.com/v1', model: 'deepseek-v4-flash', mark: 'D', color: '#4d6bfe', section: '国内模型' },
+  { id: 'qwen', icon: qwenIcon, label: '通义千问', baseUrl: 'https://dashscope.aliyuncs.com/compatible-mode/v1', model: 'qwen-plus', mark: 'Q', color: '#615ced', section: '国内模型' },
+  { id: 'zhipu', icon: zhipuIcon, label: '智谱 GLM', baseUrl: 'https://open.bigmodel.cn/api/paas/v4', model: 'glm-4-flash', mark: 'Z', color: '#2f6bff', section: '国内模型' },
+  { id: 'kimi', icon: kimiIcon, label: 'Kimi', baseUrl: 'https://api.moonshot.cn/v1', model: 'moonshot-v1-8k', mark: 'K', color: '#111827', section: '国内模型' },
+  { id: 'minimax', icon: minimaxIcon, label: 'MiniMax', baseUrl: 'https://api.minimaxi.com/v1', model: 'MiniMax-M2', mark: 'M', color: '#e85d3f', section: '国内模型' },
+  { id: 'ollama', icon: ollamaIcon, label: 'Ollama（本地）', baseUrl: 'http://localhost:11434/v1', model: 'llama3.2', mark: 'L', color: '#374151', section: '本地' },
+  { id: 'openai', icon: openaiIcon, label: 'OpenAI', baseUrl: 'https://api.openai.com/v1', model: 'gpt-4o-mini', mark: 'O', color: '#10a37f', section: '国外模型' },
+  { id: 'anthropic', icon: claudeIcon, label: 'Anthropic Claude', baseUrl: 'https://api.anthropic.com/v1', model: 'claude-sonnet-4-20250514', mark: 'A', color: '#d97757', section: '国外模型' },
+  { id: 'gemini', icon: geminiIcon, label: 'Google Gemini', baseUrl: 'https://generativelanguage.googleapis.com/v1beta/openai', model: 'gemini-2.0-flash', mark: 'G', color: '#4285f4', section: '国外模型' },
+  { id: 'openrouter', icon: openrouterIcon, label: 'OpenRouter', baseUrl: 'https://openrouter.ai/api/v1', model: 'openai/gpt-4o-mini', mark: 'R', color: '#111827', section: '国外模型' }
 ]
 
 function ProviderMark({ mark, color }: { mark: string; color: string }): JSX.Element {
   return <span className="provider-mark" style={{ '--provider-color': color } as CSSProperties}>{mark}</span>
 }
 
+function ProviderIcon({ preset }: { preset: AIProviderPreset }): JSX.Element {
+  if (preset.icon) {
+    return <span className="provider-logo" style={{ color: preset.color }} dangerouslySetInnerHTML={{ __html: preset.icon }} />
+  }
+  return <ProviderMark mark={preset.mark} color={preset.color} />
+}
+
 function providerIdOf(config: AIConfigPublic): string {
   const base = config.baseUrl.trim().replace(/\/+$/, '').toLowerCase()
-  return AI_PROVIDERS.find((item) => item.baseUrl.replace(/\/+$/, '').toLowerCase() === base && item.model === config.model)?.id ?? 'custom'
+  return AI_PROVIDERS.find((item) => item.baseUrl.replace(/\/+$/, '').toLowerCase() === base)?.id ?? 'custom'
 }
 
 function SettingsIcon({ name }: { name: string }): JSX.Element {
@@ -417,7 +435,7 @@ export default function SettingsView({ info, prefs, onPrefs, notify, focus, onFo
                     value: item.id,
                     label: item.label,
                     section: item.section,
-                    icon: <ProviderMark mark={item.mark} color={item.color} />
+                    icon: <ProviderIcon preset={item} />
                   })),
                   { value: 'custom', label: '自定义 / 兼容接口', section: '自定义', icon: <ProviderMark mark="C" color="#64748b" /> }
                 ]}
@@ -438,7 +456,7 @@ export default function SettingsView({ info, prefs, onPrefs, notify, focus, onFo
                     options={[...new Set([aiConfig.model, ...aiModels])].filter(Boolean).map((value) => ({ value, label: value }))}
                   />
                 ) : (
-                  <input className="input ai-config-input" value={aiConfig.model} placeholder="deepseek-chat" readOnly={aiProvider !== 'custom'} disabled={aiBusy} onChange={(event) => { invalidateAIVerification(); setAIConfig({ ...aiConfig, model: event.target.value }) }} />
+                  <input className="input ai-config-input" value={aiConfig.model} placeholder="deepseek-chat" disabled={aiBusy} onChange={(event) => { invalidateAIVerification(); setAIConfig({ ...aiConfig, model: event.target.value }) }} />
                 )}
                 <button className="btn small" disabled={aiBusy || aiModelsLoading} onClick={() => void fetchAIModels()}>
                   {aiModelsLoading ? '获取中…' : '获取模型'}

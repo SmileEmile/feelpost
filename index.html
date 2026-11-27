@@ -100,12 +100,43 @@
 
         <nav class="hidden items-center gap-7 text-[13px] font-medium text-slate-600 md:flex dark:text-slate-300" aria-label="Primary navigation">
           <a href="#home" class="transition-colors hover:text-slate-950 dark:hover:text-white" data-i18n="nav.home">首页</a>
-          <!-- 文档：当前指向页面内的使用流程 -->
           <a href="#docs" class="transition-colors hover:text-slate-950 dark:hover:text-white" data-i18n="nav.docs">文档</a>
-          <a href="#quickstart" class="transition-colors hover:text-slate-950 dark:hover:text-white" data-i18n="nav.quickstart">快速开始</a>
           <!-- 官方 GitHub 仓库 -->
           <a href="https://github.com/smileemile/feelpost" target="_blank" rel="noreferrer" class="transition-colors hover:text-slate-950 dark:hover:text-white" data-i18n="nav.github" data-github-link>GitHub</a>
-          <a href="#download" class="transition-colors hover:text-slate-950 dark:hover:text-white" data-i18n="nav.download">下载</a>
+          <div class="relative" data-download-root>
+            <button type="button" class="flex items-center gap-1 rounded-md py-1 text-[13px] font-medium text-slate-600 transition-colors hover:text-slate-950 dark:text-slate-300 dark:hover:text-white" data-download-toggle aria-haspopup="menu" aria-expanded="false">
+              <span data-i18n="nav.download">下载</span>
+              <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="absolute right-0 top-9 z-50 hidden w-[300px] rounded-xl border border-slate-200 bg-white p-1.5 shadow-soft dark:border-white/10 dark:bg-[#111820]" data-download-menu role="menu">
+              <div class="flex items-center justify-between px-2.5 pb-1.5 pt-1"><p class="text-[9px] font-semibold uppercase tracking-[0.16em] text-slate-400" data-i18n="download.choose">选择平台</p><span class="font-mono text-[9px] text-slate-400" data-release-version>v0.1.0</span></div>
+              <a href="https://github.com/SmileEmile/FeelPost/releases/download/v0.1.0/FeelPost-0.1.0-arm64.dmg" target="_blank" rel="noreferrer" class="flex items-center gap-2.5 rounded-lg px-2.5 py-2 transition-colors hover:bg-slate-50 dark:hover:bg-white/5" data-download="mac-arm64">
+                <span class="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-slate-100 text-slate-600 dark:bg-white/5 dark:text-slate-300"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.8c0-2.1 1.7-3.1 1.8-3.2-1-1.4-2.5-1.6-3-1.6-1.3-.1-2.5.7-3.1.7-.7 0-1.7-.7-2.8-.7-1.4 0-2.7.8-3.5 2.1-1.5 2.6-.4 6.5 1.1 8.6.7 1 1.6 2.2 2.7 2.1 1.1 0 1.5-.7 2.9-.7s1.7.7 2.9.7c1.2 0 2-1 2.7-2.1.9-1.2 1.2-2.4 1.2-2.5-.1 0-2.4-.9-2.4-3.4zM14.2 6.3c.6-.8 1.1-1.8 1-2.9-.9 0-2 .6-2.6 1.4-.6.7-1.1 1.8-1 2.8 1 .1 2-.5 2.6-1.3z"/></svg></span>
+                <span class="min-w-0 flex-1"><span class="block text-[11.5px] font-semibold">macOS <span class="font-normal text-slate-400">.dmg</span></span><span class="block text-[9.5px] text-slate-400" data-i18n="download.macArm">Apple Silicon</span></span>
+                <svg class="h-3.5 w-3.5 shrink-0 text-slate-300 dark:text-slate-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l4-4m-4 4l-4-4M5 21h14"/></svg>
+              </a>
+              <a href="https://github.com/SmileEmile/FeelPost/releases/download/v0.1.0/FeelPost-0.1.0-x64.dmg" target="_blank" rel="noreferrer" class="flex items-center gap-2.5 rounded-lg px-2.5 py-2 transition-colors hover:bg-slate-50 dark:hover:bg-white/5" data-download="mac-x64">
+                <span class="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-slate-100 text-slate-600 dark:bg-white/5 dark:text-slate-300"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.8c0-2.1 1.7-3.1 1.8-3.2-1-1.4-2.5-1.6-3-1.6-1.3-.1-2.5.7-3.1.7-.7 0-1.7-.7-2.8-.7-1.4 0-2.7.8-3.5 2.1-1.5 2.6-.4 6.5 1.1 8.6.7 1 1.6 2.2 2.7 2.1 1.1 0 1.5-.7 2.9-.7s1.7.7 2.9.7c1.2 0 2-1 2.7-2.1.9-1.2 1.2-2.4 1.2-2.5-.1 0-2.4-.9-2.4-3.4zM14.2 6.3c.6-.8 1.1-1.8 1-2.9-.9 0-2 .6-2.6 1.4-.6.7-1.1 1.8-1 2.8 1 .1 2-.5 2.6-1.3z"/></svg></span>
+                <span class="min-w-0 flex-1"><span class="block text-[11.5px] font-semibold">macOS <span class="font-normal text-slate-400">.dmg</span></span><span class="block text-[9.5px] text-slate-400" data-i18n="download.macIntel">Intel</span></span>
+                <svg class="h-3.5 w-3.5 shrink-0 text-slate-300 dark:text-slate-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l4-4m-4 4l-4-4M5 21h14"/></svg>
+              </a>
+              <a href="https://github.com/SmileEmile/FeelPost/releases/download/v0.1.0/FeelPost-0.1.0-x64-Setup.exe" target="_blank" rel="noreferrer" class="flex items-center gap-2.5 rounded-lg px-2.5 py-2 transition-colors hover:bg-slate-50 dark:hover:bg-white/5" data-download="win-x64">
+                <span class="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-slate-100 text-slate-600 dark:bg-white/5 dark:text-slate-300"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.5l7.5-1.3v7H3zM12.2 4l8.8-1.5v8.7h-8.8zM3 12.2h7.5v7L3 17.9zM12.2 12.2H21v8.3L12.2 19z"/></svg></span>
+                <span class="min-w-0 flex-1"><span class="block text-[11.5px] font-semibold">Windows <span class="font-normal text-slate-400">.exe</span></span><span class="block text-[9.5px] text-slate-400" data-i18n="download.winSetup">Installer · x64</span></span>
+                <svg class="h-3.5 w-3.5 shrink-0 text-slate-300 dark:text-slate-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l4-4m-4 4l-4-4M5 21h14"/></svg>
+              </a>
+              <a href="https://github.com/SmileEmile/FeelPost/releases/download/v0.1.0/FeelPost-0.1.0-x64-Portable.exe" target="_blank" rel="noreferrer" class="flex items-center gap-2.5 rounded-lg px-2.5 py-2 transition-colors hover:bg-slate-50 dark:hover:bg-white/5" data-download="win-portable">
+                <span class="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-slate-100 text-slate-600 dark:bg-white/5 dark:text-slate-300"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.5l7.5-1.3v7H3zM12.2 4l8.8-1.5v8.7h-8.8zM3 12.2h7.5v7L3 17.9zM12.2 12.2H21v8.3L12.2 19z"/></svg></span>
+                <span class="min-w-0 flex-1"><span class="block text-[11.5px] font-semibold">Windows <span class="font-normal text-slate-400">.exe</span></span><span class="block text-[9.5px] text-slate-400" data-i18n="download.winPortable">Portable · x64</span></span>
+                <svg class="h-3.5 w-3.5 shrink-0 text-slate-300 dark:text-slate-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l4-4m-4 4l-4-4M5 21h14"/></svg>
+              </a>
+              <div class="mt-1 border-t border-slate-100 pt-1 dark:border-white/[0.06]">
+                <a href="https://github.com/SmileEmile/FeelPost/releases" target="_blank" rel="noreferrer" class="flex items-center justify-between rounded-lg px-2.5 py-2 text-[10.5px] text-slate-500 transition-colors hover:bg-slate-50 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-white" data-download="all">
+                  <span data-i18n="download.all">所有版本</span><svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
         </nav>
 
         <div class="flex items-center gap-1.5">
@@ -138,20 +169,30 @@
       <nav class="flex flex-col gap-1 text-[13px] font-medium text-slate-700 dark:text-slate-200" aria-label="Mobile navigation">
         <a href="#home" class="rounded-md px-2 py-2 hover:bg-slate-50 dark:hover:bg-white/5" data-i18n="nav.home">首页</a>
         <a href="#docs" class="rounded-md px-2 py-2 hover:bg-slate-50 dark:hover:bg-white/5" data-i18n="nav.docs">文档</a>
-        <a href="#quickstart" class="rounded-md px-2 py-2 hover:bg-slate-50 dark:hover:bg-white/5" data-i18n="nav.quickstart">快速开始</a>
         <a href="https://github.com/smileemile/feelpost" target="_blank" rel="noreferrer" class="rounded-md px-2 py-2 hover:bg-slate-50 dark:hover:bg-white/5" data-i18n="nav.github" data-github-link>GitHub</a>
-        <a href="#download" class="rounded-md px-2 py-2 hover:bg-slate-50 dark:hover:bg-white/5" data-i18n="nav.download">下载</a>
+        <div class="mt-1 rounded-md px-2 py-2">
+          <div class="mb-1.5 flex items-center justify-between"><p class="text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-400" data-i18n="nav.download">下载</p><span class="font-mono text-[9px] text-slate-400" data-release-version>v0.1.0</span></div>
+          <div class="grid grid-cols-2 gap-1.5">
+            <a href="https://github.com/SmileEmile/FeelPost/releases/download/v0.1.0/FeelPost-0.1.0-arm64.dmg" target="_blank" rel="noreferrer" class="rounded-md border border-slate-200 px-2.5 py-2 text-[10.5px] text-slate-600 hover:bg-slate-50 dark:border-white/10 dark:text-slate-300 dark:hover:bg-white/5" data-download="mac-arm64">macOS <span class="text-slate-400">Apple Silicon</span></a>
+            <a href="https://github.com/SmileEmile/FeelPost/releases/download/v0.1.0/FeelPost-0.1.0-x64.dmg" target="_blank" rel="noreferrer" class="rounded-md border border-slate-200 px-2.5 py-2 text-[10.5px] text-slate-600 hover:bg-slate-50 dark:border-white/10 dark:text-slate-300 dark:hover:bg-white/5" data-download="mac-x64">macOS <span class="text-slate-400">Intel</span></a>
+            <a href="https://github.com/SmileEmile/FeelPost/releases/download/v0.1.0/FeelPost-0.1.0-x64-Setup.exe" target="_blank" rel="noreferrer" class="rounded-md border border-slate-200 px-2.5 py-2 text-[10.5px] text-slate-600 hover:bg-slate-50 dark:border-white/10 dark:text-slate-300 dark:hover:bg-white/5" data-download="win-x64">Windows <span class="text-slate-400">Installer</span></a>
+            <a href="https://github.com/SmileEmile/FeelPost/releases/download/v0.1.0/FeelPost-0.1.0-x64-Portable.exe" target="_blank" rel="noreferrer" class="rounded-md border border-slate-200 px-2.5 py-2 text-[10.5px] text-slate-600 hover:bg-slate-50 dark:border-white/10 dark:text-slate-300 dark:hover:bg-white/5" data-download="win-portable">Windows <span class="text-slate-400">Portable</span></a>
+          </div>
+          <a href="https://github.com/SmileEmile/FeelPost/releases" target="_blank" rel="noreferrer" class="mt-1.5 inline-flex text-[10px] text-slate-400 hover:text-brand-600 dark:hover:text-brand-400" data-download="all" data-i18n="download.all">所有版本</a>
+        </div>
       </nav>
     </div>
   </header>
 
   <main>
-    <section id="home" class="relative isolate overflow-hidden pt-20">
-      <div class="hero-grid pointer-events-none absolute inset-0 -z-10"></div>
-      <div class="hero-aurora"></div>
-      <div class="hero-orb -left-24 top-16 h-72 w-72"></div>
-      <div class="hero-orb secondary -right-16 top-48 h-80 w-80"></div>
-      <canvas id="particles" class="pointer-events-none absolute inset-0 -z-10 h-full w-full" aria-hidden="true"></canvas>
+    <section id="home" class="relative isolate pt-20">
+      <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+        <div class="hero-grid absolute inset-0"></div>
+        <div class="hero-aurora"></div>
+        <div class="hero-orb -left-24 top-16 h-72 w-72"></div>
+        <div class="hero-orb secondary -right-16 top-48 h-80 w-80"></div>
+        <canvas id="particles" class="pointer-events-none absolute inset-0 h-full w-full"></canvas>
+      </div>
 
       <div class="relative z-10 mx-auto max-w-7xl px-6 pb-16 pt-14 lg:px-8 lg:pb-24 lg:pt-20">
         <div class="grid items-center gap-12 lg:grid-cols-[1.02fr_.98fr] lg:gap-10">
@@ -169,9 +210,41 @@
             <p class="mx-auto mt-6 max-w-xl text-pretty text-[14px] leading-7 text-slate-600 sm:text-[15px] lg:mx-0 dark:text-slate-300" data-i18n="hero.lead">FeelPost 把 Spring Boot 项目里的接口自动找出来，带着环境、请求和用例一起调通；调完直接导出文档，也可以交给 AI 整理成前端看得懂、能直接联调的版本。全程本地运行，不联网也能用，手工接口也能一起管。</p>
 
             <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row lg:justify-start">
-              <a href="#quickstart" class="group inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-brand-600 px-5 text-[13px] font-semibold text-white shadow-sm transition-colors hover:bg-brand-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-[#0b0f14]">
-                <span data-i18n="hero.primary">快速开始</span><svg class="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              <div class="relative inline-block w-full sm:w-auto" data-download-root>
+                <button type="button" class="group inline-flex h-10 w-full items-center justify-center gap-2 rounded-lg bg-brand-600 px-5 text-[13px] font-semibold text-white shadow-sm transition-colors hover:bg-brand-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 sm:w-auto dark:focus-visible:ring-offset-[#0b0f14]" data-download-toggle aria-haspopup="menu" aria-expanded="false">
+                  <span data-i18n="download.cta">下载客户端</span>
+                  <svg class="h-3.5 w-3.5 transition-transform group-hover:translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l4-4m-4 4l-4-4M5 21h14"/></svg>
+                  <svg class="h-3 w-3 opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <div class="absolute left-1/2 bottom-12 top-auto z-30 -translate-x-1/2 sm:bottom-auto sm:top-12 lg:left-0 lg:translate-x-0 hidden w-[308px] rounded-xl border border-slate-200 bg-white p-1.5 shadow-soft dark:border-white/10 dark:bg-[#111820]" data-download-menu role="menu">
+              <div class="flex items-center justify-between px-2.5 pb-1.5 pt-1"><p class="text-[9px] font-semibold uppercase tracking-[0.16em] text-slate-400" data-i18n="download.choose">选择平台</p><span class="font-mono text-[9px] text-slate-400" data-release-version>v0.1.0</span></div>
+              <a href="https://github.com/SmileEmile/FeelPost/releases/download/v0.1.0/FeelPost-0.1.0-arm64.dmg" target="_blank" rel="noreferrer" class="flex items-center gap-2.5 rounded-lg px-2.5 py-2 transition-colors hover:bg-slate-50 dark:hover:bg-white/5" data-download="mac-arm64">
+                <span class="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-slate-100 text-slate-600 dark:bg-white/5 dark:text-slate-300"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.8c0-2.1 1.7-3.1 1.8-3.2-1-1.4-2.5-1.6-3-1.6-1.3-.1-2.5.7-3.1.7-.7 0-1.7-.7-2.8-.7-1.4 0-2.7.8-3.5 2.1-1.5 2.6-.4 6.5 1.1 8.6.7 1 1.6 2.2 2.7 2.1 1.1 0 1.5-.7 2.9-.7s1.7.7 2.9.7c1.2 0 2-1 2.7-2.1.9-1.2 1.2-2.4 1.2-2.5-.1 0-2.4-.9-2.4-3.4zM14.2 6.3c.6-.8 1.1-1.8 1-2.9-.9 0-2 .6-2.6 1.4-.6.7-1.1 1.8-1 2.8 1 .1 2-.5 2.6-1.3z"/></svg></span>
+                <span class="min-w-0 flex-1"><span class="block text-[11.5px] font-semibold">macOS <span class="font-normal text-slate-400">.dmg</span></span><span class="block text-[9.5px] text-slate-400" data-i18n="download.macArm">Apple Silicon</span></span>
+                <svg class="h-3.5 w-3.5 shrink-0 text-slate-300 dark:text-slate-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l4-4m-4 4l-4-4M5 21h14"/></svg>
               </a>
+              <a href="https://github.com/SmileEmile/FeelPost/releases/download/v0.1.0/FeelPost-0.1.0-x64.dmg" target="_blank" rel="noreferrer" class="flex items-center gap-2.5 rounded-lg px-2.5 py-2 transition-colors hover:bg-slate-50 dark:hover:bg-white/5" data-download="mac-x64">
+                <span class="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-slate-100 text-slate-600 dark:bg-white/5 dark:text-slate-300"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.8c0-2.1 1.7-3.1 1.8-3.2-1-1.4-2.5-1.6-3-1.6-1.3-.1-2.5.7-3.1.7-.7 0-1.7-.7-2.8-.7-1.4 0-2.7.8-3.5 2.1-1.5 2.6-.4 6.5 1.1 8.6.7 1 1.6 2.2 2.7 2.1 1.1 0 1.5-.7 2.9-.7s1.7.7 2.9.7c1.2 0 2-1 2.7-2.1.9-1.2 1.2-2.4 1.2-2.5-.1 0-2.4-.9-2.4-3.4zM14.2 6.3c.6-.8 1.1-1.8 1-2.9-.9 0-2 .6-2.6 1.4-.6.7-1.1 1.8-1 2.8 1 .1 2-.5 2.6-1.3z"/></svg></span>
+                <span class="min-w-0 flex-1"><span class="block text-[11.5px] font-semibold">macOS <span class="font-normal text-slate-400">.dmg</span></span><span class="block text-[9.5px] text-slate-400" data-i18n="download.macIntel">Intel</span></span>
+                <svg class="h-3.5 w-3.5 shrink-0 text-slate-300 dark:text-slate-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l4-4m-4 4l-4-4M5 21h14"/></svg>
+              </a>
+              <a href="https://github.com/SmileEmile/FeelPost/releases/download/v0.1.0/FeelPost-0.1.0-x64-Setup.exe" target="_blank" rel="noreferrer" class="flex items-center gap-2.5 rounded-lg px-2.5 py-2 transition-colors hover:bg-slate-50 dark:hover:bg-white/5" data-download="win-x64">
+                <span class="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-slate-100 text-slate-600 dark:bg-white/5 dark:text-slate-300"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.5l7.5-1.3v7H3zM12.2 4l8.8-1.5v8.7h-8.8zM3 12.2h7.5v7L3 17.9zM12.2 12.2H21v8.3L12.2 19z"/></svg></span>
+                <span class="min-w-0 flex-1"><span class="block text-[11.5px] font-semibold">Windows <span class="font-normal text-slate-400">.exe</span></span><span class="block text-[9.5px] text-slate-400" data-i18n="download.winSetup">Installer · x64</span></span>
+                <svg class="h-3.5 w-3.5 shrink-0 text-slate-300 dark:text-slate-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l4-4m-4 4l-4-4M5 21h14"/></svg>
+              </a>
+              <a href="https://github.com/SmileEmile/FeelPost/releases/download/v0.1.0/FeelPost-0.1.0-x64-Portable.exe" target="_blank" rel="noreferrer" class="flex items-center gap-2.5 rounded-lg px-2.5 py-2 transition-colors hover:bg-slate-50 dark:hover:bg-white/5" data-download="win-portable">
+                <span class="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-slate-100 text-slate-600 dark:bg-white/5 dark:text-slate-300"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.5l7.5-1.3v7H3zM12.2 4l8.8-1.5v8.7h-8.8zM3 12.2h7.5v7L3 17.9zM12.2 12.2H21v8.3L12.2 19z"/></svg></span>
+                <span class="min-w-0 flex-1"><span class="block text-[11.5px] font-semibold">Windows <span class="font-normal text-slate-400">.exe</span></span><span class="block text-[9.5px] text-slate-400" data-i18n="download.winPortable">Portable · x64</span></span>
+                <svg class="h-3.5 w-3.5 shrink-0 text-slate-300 dark:text-slate-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l4-4m-4 4l-4-4M5 21h14"/></svg>
+              </a>
+              <div class="mt-1 border-t border-slate-100 pt-1 dark:border-white/[0.06]">
+                <a href="https://github.com/SmileEmile/FeelPost/releases" target="_blank" rel="noreferrer" class="flex items-center justify-between rounded-lg px-2.5 py-2 text-[10.5px] text-slate-500 transition-colors hover:bg-slate-50 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-white" data-download="all">
+                  <span data-i18n="download.all">所有版本</span><svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+                </a>
+              </div>
+            </div>
+              </div>
               <a href="https://github.com/smileemile/feelpost" target="_blank" rel="noreferrer" class="inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-5 text-[13px] font-semibold text-slate-700 shadow-sm transition-colors hover:border-slate-300 hover:bg-slate-50 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:hover:border-white/20 dark:hover:bg-white/10" data-github-link>
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .8a11.2 11.2 0 0 0-3.5 21.8c.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.8 2.7 1.3 3.3 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.6-2.8 5.5-5.4 5.8.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6A11.2 11.2 0 0 0 12 .8z"/></svg>
                 <span data-i18n="hero.secondary">GitHub</span>
@@ -183,10 +256,7 @@
               <span class="inline-flex items-center gap-1.5"><svg class="h-3 w-3 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="hero.point2">断网可用</span></span>
               <span class="inline-flex items-center gap-1.5"><svg class="h-3 w-3 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg><span data-i18n="hero.point3">AI 可选</span></span>
             </div>
-            <a href="#download" class="mt-4 inline-flex items-center gap-1.5 text-[11px] font-medium text-slate-500 underline decoration-slate-300 underline-offset-4 transition-colors hover:text-brand-600 dark:text-slate-400 dark:decoration-slate-600 dark:hover:text-brand-400">
-              <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l4-4m-4 4l-4-4M5 21h14"/></svg>
-              <span data-i18n="hero.download">下载 macOS / Windows 客户端</span>
-            </a>
+
           </div>
 
           <div class="relative mx-auto w-full max-w-[560px] lg:max-w-none">
@@ -402,21 +472,20 @@
       </div>
     </section>
 
-    <section id="quickstart" class="border-y border-slate-200/70 bg-slate-50/60 py-20 sm:py-24 dark:border-white/[0.07] dark:bg-white/[0.015]">
-      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <section id="quickstart" class="border-y border-slate-200/70 bg-slate-50/60 py-16 sm:py-20 dark:border-white/[0.07] dark:bg-white/[0.015]">
+      <div class="mx-auto max-w-5xl px-6 lg:px-8">
         <div class="max-w-2xl">
-          <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-600 dark:text-brand-400" data-i18n="quick.eyebrow">下载就用</p>
-          <h2 class="mt-3 text-[26px] font-bold tracking-[-0.025em] sm:text-[32px]" data-i18n="quick.title">下载就能用，不用先学一套新东西</h2>
-          <p class="mt-4 text-[13px] leading-6 text-slate-600 dark:text-slate-300" data-i18n="quick.lead">macOS 和 Windows 都有客户端。想从源码跑也行，命令都在这儿。</p>
+          <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-600 dark:text-brand-400" data-i18n="quick.eyebrow">本地部署</p>
+          <h2 class="mt-3 text-[24px] font-bold tracking-[-0.025em] sm:text-[30px]" data-i18n="quick.title">想从源码跑，命令都在这儿</h2>
+          <p class="mt-3 text-[13px] leading-6 text-slate-600 dark:text-slate-300" data-i18n="quick.lead">不想用安装包，或者想自己构建客户端，直接照下面来。</p>
         </div>
-        <div class="mt-10 grid gap-5 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,.85fr)]">
-          <div class="overflow-hidden rounded-xl border border-slate-800/10 bg-[#0d1117] shadow-xl shadow-slate-900/5 dark:border-white/10">
-            <div class="flex items-center justify-between border-b border-white/[0.08] px-4 py-3">
-              <div class="flex items-center gap-2 text-[11px] text-slate-400"><span class="h-2 w-2 rounded-full bg-[#ff5f57]"></span><span class="h-2 w-2 rounded-full bg-[#febc2e]"></span><span class="h-2 w-2 rounded-full bg-[#28c840]"></span><span class="ml-2 font-mono text-[10.5px]" data-i18n="install.title">本地部署</span></div>
-              <button type="button" class="copy-btn inline-flex h-7 items-center gap-1.5 rounded-md border border-white/10 px-2.5 text-[10.5px] font-medium text-slate-300 transition-colors hover:bg-white/5" data-copy-target="install-command" data-i18n="install.copy">复制命令</button>
-            </div>
-            <!-- 【此处替换】安装命令 -->
-            <pre class="code-scroll overflow-x-auto p-5 text-[11.5px] leading-6"><code id="install-command" class="font-mono text-slate-300"><span class="text-slate-500"># Clone and start locally</span>
+        <div class="mt-8 overflow-hidden rounded-xl border border-slate-800/10 bg-[#0d1117] shadow-xl shadow-slate-900/5 dark:border-white/10">
+          <div class="flex items-center justify-between border-b border-white/[0.08] px-4 py-3">
+            <div class="flex items-center gap-2 text-[11px] text-slate-400"><span class="h-2 w-2 rounded-full bg-[#ff5f57]"></span><span class="h-2 w-2 rounded-full bg-[#febc2e]"></span><span class="h-2 w-2 rounded-full bg-[#28c840]"></span><span class="ml-2 font-mono text-[10.5px]" data-i18n="install.title">本地部署</span></div>
+            <button type="button" class="copy-btn inline-flex h-7 items-center gap-1.5 rounded-md border border-white/10 px-2.5 text-[10.5px] font-medium text-slate-300 transition-colors hover:bg-white/5" data-copy-target="install-command" data-i18n="install.copy">复制命令</button>
+          </div>
+          <!-- 【此处替换】安装命令 -->
+          <pre class="code-scroll overflow-x-auto p-5 text-[11.5px] leading-6"><code id="install-command" class="font-mono text-slate-300"><span class="text-slate-500"># Clone and start locally</span>
 <span class="text-emerald-300">git clone</span> https://github.com/smileemile/feelpost.git
 <span class="text-emerald-300">cd</span> feelpost
 <span class="text-emerald-300">npm install</span>
@@ -425,21 +494,7 @@
 <span class="text-slate-500"># Build installers</span>
 <span class="text-emerald-300">npm run dist:mac:arm64</span>   <span class="text-slate-500"># macOS .dmg</span>
 <span class="text-emerald-300">npm run dist:win</span>         <span class="text-slate-500"># Windows .exe</span></code></pre>
-            <p class="border-t border-white/[0.08] px-5 py-3 text-[10.5px] leading-5 text-slate-500" data-i18n="install.note">安装包走 GitHub Releases；构建命令用于本地打包。</p>
-          </div>
-          <div id="download" class="grid gap-3">
-            <a href="https://github.com/smileemile/feelpost/releases/latest" target="_blank" rel="noreferrer" class="group flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-4 transition-colors hover:border-brand-200 dark:border-white/[0.08] dark:bg-white/[0.025] dark:hover:border-brand-500/30">
-              <span class="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-slate-100 text-slate-600 dark:bg-white/5 dark:text-slate-300"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.8c0-2.1 1.7-3.1 1.8-3.2-1-1.4-2.5-1.6-3-1.6-1.3-.1-2.5.7-3.1.7-.7 0-1.7-.7-2.8-.7-1.4 0-2.7.8-3.5 2.1-1.5 2.6-.4 6.5 1.1 8.6.7 1 1.6 2.2 2.7 2.1 1.1 0 1.5-.7 2.9-.7s1.7.7 2.9.7c1.2 0 2-1 2.7-2.1.9-1.2 1.2-2.4 1.2-2.5-.1 0-2.4-.9-2.4-3.4zM14.2 6.3c.6-.8 1.1-1.8 1-2.9-.9 0-2 .6-2.6 1.4-.6.7-1.1 1.8-1 2.8 1 .1 2-.5 2.6-1.3z"/></svg></span>
-              <span class="min-w-0 flex-1"><span class="block text-[12.5px] font-semibold">macOS <span class="font-normal text-slate-400">.dmg</span></span><span class="mt-0.5 block text-[11px] text-slate-500 dark:text-slate-400" data-i18n="download.macDesc">Apple Silicon / Intel · 原生客户端</span></span>
-              <svg class="h-4 w-4 text-slate-300 dark:text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
-            <a href="https://github.com/smileemile/feelpost/releases/latest" target="_blank" rel="noreferrer" class="group flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-4 transition-colors hover:border-brand-200 dark:border-white/[0.08] dark:bg-white/[0.025] dark:hover:border-brand-500/30">
-              <span class="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-slate-100 text-slate-600 dark:bg-white/5 dark:text-slate-300"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.5l7.5-1.3v7H3zM12.2 4l8.8-1.5v8.7h-8.8zM3 12.2h7.5v7L3 17.9zM12.2 12.2H21v8.3L12.2 19z"/></svg></span>
-              <span class="min-w-0 flex-1"><span class="block text-[12.5px] font-semibold">Windows <span class="font-normal text-slate-400">.exe</span></span><span class="mt-0.5 block text-[11px] text-slate-500 dark:text-slate-400" data-i18n="download.winDesc">安装版 · x64</span></span>
-              <svg class="h-4 w-4 text-slate-300 dark:text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
-            <p class="px-1 text-[10.5px] leading-5 text-slate-400" data-i18n="download.note">macOS .dmg / Windows .exe，直接从 GitHub Releases 下载。当前包未签名，系统会提示确认。</p>
-          </div>
+          <p class="border-t border-white/[0.08] px-5 py-3 text-[10.5px] leading-5 text-slate-500" data-i18n="install.note">安装包从 GitHub Releases 下载；这里是从源码运行与本地打包。</p>
         </div>
       </div>
     </section>
@@ -498,6 +553,7 @@
     const GITHUB_REPO = 'smileemile/feelpost'
     const GITHUB_URL = `https://github.com/${GITHUB_REPO}`
     const RELEASES_URL = `${GITHUB_URL}/releases/latest`
+    const RELEASES_INDEX = `${GITHUB_URL}/releases`
 
     const I18N = {
       zh: {
@@ -515,9 +571,9 @@
         'flow.1': '扫描源码', 'flow.1d': 'Controller / DTO', 'flow.2': '本地调通', 'flow.2d': '环境 / 请求 / 用例', 'flow.3': '交给 AI', 'flow.3d': '字段说明 / 联调文档', 'flow.4': '前端开工', 'flow.4d': 'Markdown / 可复制示例',
         'docs.eyebrow': '顺手的工作流', 'docs.title': '调接口，顺手把文档也写了', 'docs.lead': '选接口、切环境、发请求、存用例，最后导出前端能直接看的 Markdown。少在几个工具之间来回粘贴。',
         'docs.step1': '把源码目录丢进来', 'docs.step1desc': '选一个 Spring Boot 工程，数据就留在本机。', 'docs.step2': '扫出接口，顺手调通', 'docs.step2desc': '候选变更逐项确认，人工修改不会被下次扫描盖掉。', 'docs.step3': '用例和文档一起留下', 'docs.step3desc': '保存响应示例和用例，导出项目 Markdown 或 AI 整理版。',
-        'docs.copy': '复制', 'flow.source': 'Spring Boot 源码', 'flow.scan': '生成接口资产', 'flow.debug': '本地调试', 'flow.handoff': '交付给前端 / AI', 'quick.eyebrow': '下载就用', 'quick.title': '下载就能用，不用先学一套新东西', 'quick.lead': 'macOS 和 Windows 都有客户端。想从源码跑也行，命令都在这儿。',
-        'install.title': '本地部署', 'install.copy': '复制命令', 'install.note': '安装包走 GitHub Releases；构建命令用于本地打包。',
-        'download.macDesc': 'Apple Silicon / Intel · 原生客户端', 'download.winDesc': '安装版 · x64', 'download.note': 'macOS .dmg / Windows .exe，直接从 GitHub Releases 下载。当前包未签名，系统会提示确认。',
+        'docs.copy': '复制', 'flow.source': 'Spring Boot 源码', 'flow.scan': '生成接口资产', 'flow.debug': '本地调试', 'flow.handoff': '交付给前端 / AI', 'quick.eyebrow': '本地部署', 'quick.title': '想从源码跑，命令都在这儿', 'quick.lead': '不想用安装包，或者想自己构建客户端，直接照下面来。', 'download.choose': '选择平台', 'download.cta': '下载客户端', 'download.all': '所有版本',
+        'install.title': '本地部署', 'install.copy': '复制命令', 'install.note': '安装包从 GitHub Releases 下载；这里是从源码运行与本地打包。',
+        'download.macDesc': 'Apple Silicon / Intel · 原生客户端', 'download.macArm': 'Apple Silicon 芯片', 'download.macIntel': 'Intel 芯片', 'download.winSetup': '安装版 · x64', 'download.winPortable': '便携版 · x64', 'download.winDesc': '安装版 · x64', 'download.note': 'macOS .dmg / Windows .exe，直接从 GitHub Releases 下载。当前包未签名，系统会提示确认。',
         'preview.eyebrow': '产品预览', 'preview.title': '每天用的工作台，长这样', 'preview.lead': '左边接口树，右边请求和响应，用例、文档都在顺手的位置。', 'preview.placeholder': '产品截图占位',
         'contribute.eyebrow': '一起共建', 'contribute.title': '一起把它做得更好用', 'contribute.lead': '如果它帮你少加班了，欢迎点个 Star；遇到问题直接提 Issue，想改哪里就发 PR。', 'contribute.star': 'Star on GitHub', 'contribute.issue': '提交 Issue',
         'footer.tagline': '开源 · 本地 · AI 协作的 API 接口测试工具', 'footer.docs': '文档', 'footer.author': '作者：Emile',
@@ -538,9 +594,9 @@
         'flow.1': 'Scan source', 'flow.1d': 'Controller / DTO', 'flow.2': 'Debug locally', 'flow.2d': 'Environments / requests / cases', 'flow.3': 'Hand to AI', 'flow.3d': 'Field notes / handoff docs', 'flow.4': 'Frontend starts', 'flow.4d': 'Markdown / copy-ready examples',
         'docs.eyebrow': 'A smooth workflow', 'docs.title': 'Debug the API, leave with the docs', 'docs.lead': 'Pick an API, switch environments, send a request, save a case, then export Markdown your frontend can read. Less copy-pasting between tools.',
         'docs.step1': 'Drop in the source directory', 'docs.step1desc': 'Pick a Spring Boot project. Data stays on your machine.', 'docs.step2': 'Scan the APIs and debug them', 'docs.step2desc': 'Review candidate diffs one by one. Manual edits survive the next scan.', 'docs.step3': 'Keep cases and docs together', 'docs.step3desc': 'Save response examples and cases, then export project Markdown or an AI-polished version.',
-        'docs.copy': 'Copy', 'flow.source': 'Spring Boot source', 'flow.scan': 'Scan APIs', 'flow.debug': 'Local debug', 'flow.handoff': 'Handoff to frontend / AI', 'quick.eyebrow': 'Download and go', 'quick.title': 'Download it, skip the learning curve', 'quick.lead': 'Native clients for macOS and Windows. Prefer source? The commands are right here.',
-        'install.title': 'Local setup', 'install.copy': 'Copy command', 'install.note': 'Installers live on GitHub Releases; build commands are for local packaging.',
-        'download.macDesc': 'Apple Silicon / Intel · Native client', 'download.winDesc': 'Installer · x64', 'download.note': 'macOS .dmg / Windows .exe, straight from GitHub Releases. Current builds are unsigned, so your OS may ask for confirmation.',
+        'docs.copy': 'Copy', 'flow.source': 'Spring Boot source', 'flow.scan': 'Scan APIs', 'flow.debug': 'Local debug', 'flow.handoff': 'Handoff to frontend / AI', 'quick.eyebrow': 'Local setup', 'quick.title': 'Prefer the source? The commands are here', 'quick.lead': 'Skip the installer or build the client yourself. Start here.', 'download.choose': 'Choose a platform', 'download.cta': 'Download the app', 'download.all': 'All releases',
+        'install.title': 'Local setup', 'install.copy': 'Copy command', 'install.note': 'Installers come from GitHub Releases; this section is for running and packaging from source.',
+        'download.macDesc': 'Apple Silicon / Intel · Native client', 'download.macArm': 'Apple Silicon', 'download.macIntel': 'Intel', 'download.winSetup': 'Installer · x64', 'download.winPortable': 'Portable · x64', 'download.winDesc': 'Installer · x64', 'download.note': 'macOS .dmg / Windows .exe, straight from GitHub Releases. Current builds are unsigned, so your OS may ask for confirmation.',
         'preview.eyebrow': 'Product preview', 'preview.title': 'The workbench you will actually use', 'preview.lead': 'API tree on the left, request and response on the right, with cases and docs within reach.', 'preview.placeholder': 'Screenshot placeholder',
         'contribute.eyebrow': 'Build it with us', 'contribute.title': 'Help make it better', 'contribute.lead': 'If FeelPost saves you some overtime, give it a Star. Found a bug? Open an Issue. Want to fix something? Send a PR.', 'contribute.star': 'Star on GitHub', 'contribute.issue': 'Open an Issue',
         'footer.tagline': 'Open-source · Local · AI-assisted API testing', 'footer.docs': 'Docs', 'footer.author': 'Author: Emile',
@@ -561,9 +617,9 @@
         'flow.1': 'ソースをスキャン', 'flow.1d': 'Controller / DTO', 'flow.2': 'ローカルでデバッグ', 'flow.2d': '環境 / リクエスト / ケース', 'flow.3': 'AI に渡す', 'flow.3d': 'フィールド説明 / 連携ドキュメント', 'flow.4': 'フロント開発へ', 'flow.4d': 'Markdown / コピー可能な例',
         'docs.eyebrow': 'スムーズな流れ', 'docs.title': 'デバッグして、そのままドキュメントに', 'docs.lead': 'API を選び、環境を切り替え、リクエストを送り、ケースを保存。最後にフロントが読める Markdown を出力します。',
         'docs.step1': 'ソースディレクトリを開く', 'docs.step1desc': 'Spring Boot プロジェクトを選択。データはローカルに保存されます。', 'docs.step2': 'API をスキャンしてデバッグ', 'docs.step2desc': '候補の差分を確認。手動編集は次のスキャンで上書きされません。', 'docs.step3': 'ケースとドキュメントを残す', 'docs.step3desc': 'レスポンス例とケースを保存し、Markdown または AI 整理版を出力します。',
-        'docs.copy': 'コピー', 'flow.source': 'Spring Boot ソース', 'flow.scan': 'API をスキャン', 'flow.debug': 'ローカルデバッグ', 'flow.handoff': 'フロント / AI へ引き渡し', 'quick.eyebrow': 'ダウンロードしてすぐ', 'quick.title': 'ダウンロードして、そのまま使う', 'quick.lead': 'macOS / Windows のクライアントを用意しています。ソースから起動する場合のコマンドもここにあります。',
-        'install.title': 'ローカルセットアップ', 'install.copy': 'コマンドをコピー', 'install.note': 'インストーラーは GitHub Releases で公開。ビルドコマンドはローカル用です。',
-        'download.macDesc': 'Apple Silicon / Intel · ネイティブクライアント', 'download.winDesc': 'インストーラー · x64', 'download.note': 'macOS の .dmg / Windows の .exe を GitHub Releases から取得できます。現在は未署名のため、OS の確認が出る場合があります。',
+        'docs.copy': 'コピー', 'flow.source': 'Spring Boot ソース', 'flow.scan': 'API をスキャン', 'flow.debug': 'ローカルデバッグ', 'flow.handoff': 'フロント / AI へ引き渡し', 'quick.eyebrow': 'ローカルセットアップ', 'quick.title': 'ソースから動かす場合はこちら', 'quick.lead': 'インストーラーを使わず、自分でビルドする場合の手順です。', 'download.choose': 'プラットフォームを選択', 'download.cta': 'クライアントをダウンロード', 'download.all': 'すべてのリリース',
+        'install.title': 'ローカルセットアップ', 'install.copy': 'コマンドをコピー', 'install.note': 'インストーラーは GitHub Releases から取得できます。ここではソースからの起動とパッケージ作成を説明します。',
+        'download.macDesc': 'Apple Silicon / Intel · ネイティブクライアント', 'download.macArm': 'Apple Silicon', 'download.macIntel': 'Intel', 'download.winSetup': 'インストーラー · x64', 'download.winPortable': 'ポータブル · x64', 'download.winDesc': 'インストーラー · x64', 'download.note': 'macOS の .dmg / Windows の .exe を GitHub Releases から取得できます。現在は未署名のため、OS の確認が出る場合があります。',
         'preview.eyebrow': '製品プレビュー', 'preview.title': '毎日使うワークベンチは、こんな感じ', 'preview.lead': '左に API ツリー、右にリクエストとレスポンス。ケースもドキュメントも手の届く場所に。', 'preview.placeholder': 'スクリーンショット（差し替え）',
         'contribute.eyebrow': '一緒に作る', 'contribute.title': 'もっと使いやすくしよう', 'contribute.lead': 'FeelPost が役に立ったら Star をお願いします。不具合は Issue、修正は PR で歓迎します。', 'contribute.star': 'GitHub で Star', 'contribute.issue': 'Issue を作成',
         'footer.tagline': 'オープンソース · ローカル · AI 協調 API テストツール', 'footer.docs': 'ドキュメント', 'footer.author': '作者：Emile',
@@ -621,13 +677,152 @@
     function fallbackCopy(text) { const area = document.createElement('textarea'); area.value = text; area.style.position = 'fixed'; area.style.opacity = '0'; document.body.appendChild(area); area.select(); document.execCommand('copy'); area.remove() }
     async function copyText(text, button) { try { await navigator.clipboard.writeText(text) } catch (error) { fallbackCopy(text) } if (button) { button.classList.add('copied'); setTimeout(() => button.classList.remove('copied'), 1400) } showToast(t('toast.copied')) }
     document.querySelectorAll('[data-copy-target]').forEach((button) => button.addEventListener('click', () => { const target = document.getElementById(button.getAttribute('data-copy-target')); if (target) copyText(target.textContent, button) }))
+    function parseStarCount(raw) {
+      const value = String(raw || '').trim().replace(/,/g, '')
+      const match = value.match(/^([\d.]+)([kKmM]?)$/)
+      if (!match) return null
+      const number = Number(match[1])
+      if (!Number.isFinite(number)) return null
+      const suffix = match[2].toLowerCase()
+      return Math.round(number * (suffix === 'm' ? 1000000 : suffix === 'k' ? 1000 : 1))
+    }
+    function renderStars(count) {
+      const value = Number(count)
+      if (!Number.isFinite(value)) return
+      const display = value >= 1000 ? `${(value / 1000).toFixed(1)}k` : String(value)
+      document.querySelectorAll('[data-stars]').forEach((element) => { element.textContent = display })
+    }
+    async function fetchStarCount(url, timeout) {
+      const controller = new AbortController()
+      const timer = setTimeout(() => controller.abort(), timeout)
+      try {
+        const response = await fetch(url, { cache: 'no-store', signal: controller.signal, headers: { Accept: 'application/vnd.github+json' } })
+        if (!response.ok) return null
+        return await response.json()
+      } catch (error) {
+        return null
+      } finally {
+        clearTimeout(timer)
+      }
+    }
     async function loadStars() {
-      const elements = document.querySelectorAll('[data-stars]')
-      if (!GITHUB_REPO) return
-      try { const response = await fetch(`https://api.github.com/repos/${GITHUB_REPO}`, { headers: { Accept: 'application/vnd.github+json' } }); if (!response.ok) return; const data = await response.json(); const count = Number(data.stargazers_count); if (!Number.isFinite(count)) return; const display = count >= 1000 ? `${(count / 1000).toFixed(1)}k` : String(count); elements.forEach((element) => { element.textContent = display }) } catch (error) {}
+      try {
+        const cached = Number(localStorage.getItem('feelpost-stars'))
+        if (Number.isFinite(cached) && cached >= 0) renderStars(cached)
+      } catch (error) {}
+
+      let count = null
+      const repo = await fetchStarCount(`https://api.github.com/repos/${GITHUB_REPO}`, 6000)
+      if (repo) count = Number(repo.stargazers_count)
+      if (!Number.isFinite(count)) {
+        // Some networks block api.github.com; shields.io is a lightweight fallback.
+        const badge = await fetchStarCount(`https://img.shields.io/github/stars/${GITHUB_REPO}.json`, 6000)
+        if (badge) count = parseStarCount(badge.message || badge.value)
+      }
+      if (!Number.isFinite(count)) return
+      renderStars(count)
+      try { localStorage.setItem('feelpost-stars', String(count)) } catch (error) {}
+    }
+    function normalizeRelease(release) {
+      const tag = String(release.tag_name || release.tag || '').trim()
+      if (!tag) return null
+      const assets = Array.isArray(release.assets) ? release.assets.map((asset) => ({
+        name: asset.name || '',
+        browser_download_url: asset.browser_download_url || ''
+      })) : []
+      return { tag_name: tag, html_url: release.html_url || RELEASES_URL, assets }
+    }
+    function releaseAssetUrl(tag, suffix) {
+      return `${GITHUB_URL}/releases/download/${tag}/FeelPost-${tag.replace(/^v/i, '')}-${suffix}`
+    }
+    function applyRelease(release) {
+      if (!release || !release.tag_name) return
+      const tag = release.tag_name
+      const assets = release.assets || []
+      const findAsset = (pattern) => {
+        const match = assets.find((asset) => pattern.test(asset.name))
+        return match ? match.browser_download_url : null
+      }
+      const urls = {
+        'mac-arm64': findAsset(/arm64[^/]*\.dmg$/i) || releaseAssetUrl(tag, 'arm64.dmg'),
+        'mac-x64': findAsset(/x64[^/]*\.dmg$/i) || releaseAssetUrl(tag, 'x64.dmg'),
+        'win-x64': findAsset(/x64[^/]*Setup\.exe$/i) || findAsset(/Setup\.exe$/i) || releaseAssetUrl(tag, 'x64-Setup.exe'),
+        'win-portable': findAsset(/Portable\.exe$/i) || releaseAssetUrl(tag, 'x64-Portable.exe'),
+        'all': RELEASES_INDEX
+      }
+      document.querySelectorAll('[data-download]').forEach((link) => {
+        const url = urls[link.getAttribute('data-download')]
+        if (url) link.href = url
+      })
+      document.querySelectorAll('[data-release-version]').forEach((element) => { element.textContent = tag })
+    }
+    function readReleaseCache() {
+      try {
+        const cached = JSON.parse(localStorage.getItem('feelpost-release') || 'null')
+        if (!cached || !cached.tag_name || !cached.saved) return null
+        if (Date.now() - cached.saved > 60 * 60 * 1000) return null
+        return normalizeRelease(cached)
+      } catch (error) { return null }
+    }
+    function writeReleaseCache(release) {
+      try {
+        localStorage.setItem('feelpost-release', JSON.stringify({ saved: Date.now(), tag_name: release.tag_name, html_url: release.html_url, assets: release.assets }))
+      } catch (error) {}
+    }
+    async function loadLatestRelease() {
+      const cached = readReleaseCache()
+      if (cached) applyRelease(cached)
+      const release = await fetchStarCount(`https://api.github.com/repos/${GITHUB_REPO}/releases/latest`, 6000)
+      if (release) {
+        const normalized = normalizeRelease(release)
+        if (normalized) {
+          applyRelease(normalized)
+          writeReleaseCache(normalized)
+          return
+        }
+      }
+      // API rate limits are common on shared networks; derive the tag from shields.io.
+      const badge = await fetchStarCount(`https://img.shields.io/github/v/release/${GITHUB_REPO}.json`, 6000)
+      const tag = badge && badge.message && /^v?\d/.test(String(badge.message)) ? String(badge.message) : null
+      if (tag) {
+        const normalized = { tag_name: tag, html_url: RELEASES_URL, assets: [] }
+        applyRelease(normalized)
+        writeReleaseCache(normalized)
+      }
     }
     document.querySelectorAll('[data-github-link]').forEach((link) => { link.href = GITHUB_URL })
     document.querySelectorAll('a[href$="releases/latest"]').forEach((link) => { link.href = RELEASES_URL })
+
+    // Download menus are used in both the navbar and the hero.
+    const downloadToggles = [...document.querySelectorAll('[data-download-toggle]')]
+    function closeDownloadMenus(except) {
+      downloadToggles.forEach((toggle) => {
+        const root = toggle.closest('[data-download-root]')
+        const menu = root && root.querySelector('[data-download-menu]')
+        if (!menu || menu === except) return
+        menu.classList.add('hidden')
+        toggle.setAttribute('aria-expanded', 'false')
+      })
+    }
+    downloadToggles.forEach((toggle) => {
+      const root = toggle.closest('[data-download-root]')
+      const menu = root && root.querySelector('[data-download-menu]')
+      if (!menu) return
+      toggle.addEventListener('click', (event) => {
+        event.stopPropagation()
+        const willOpen = menu.classList.contains('hidden')
+        closeDownloadMenus(menu)
+        menu.classList.toggle('hidden', !willOpen)
+        toggle.setAttribute('aria-expanded', String(willOpen))
+      })
+      menu.addEventListener('click', () => closeDownloadMenus())
+    })
+    document.addEventListener('click', (event) => {
+      if (!event.target.closest('[data-download-root]')) closeDownloadMenus()
+    })
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeDownloadMenus()
+    })
     function updateHeader() { header.classList.toggle('nav-scrolled', window.scrollY > 8) }
     window.addEventListener('scroll', updateHeader, { passive: true }); updateHeader()
     document.querySelectorAll('.feature-card').forEach((card) => card.addEventListener('pointermove', (event) => { const rect = card.getBoundingClientRect(); card.style.setProperty('--mx', `${event.clientX - rect.left}px`); card.style.setProperty('--my', `${event.clientY - rect.top}px`) }))
@@ -654,7 +849,7 @@
       window.__feelpostParticles = { refresh: () => { cancelAnimationFrame(frame); resize(); draw() } }; window.addEventListener('resize', resize); resize(); draw()
     })()
     const savedLang = localStorage.getItem('feelpost-lang'); const browserLang = (navigator.language || '').toLowerCase(); const initialLang = I18N[savedLang] ? savedLang : browserLang.startsWith('ja') ? 'ja' : browserLang.startsWith('zh') ? 'zh' : 'en'
-    setLanguage(initialLang); const savedTheme = localStorage.getItem('feelpost-theme'); applyTheme(savedTheme === 'dark' || (savedTheme !== 'light' && systemTheme.matches) ? 'dark' : 'light'); document.getElementById('copyright-year').textContent = new Date().getFullYear(); loadStars()
+    setLanguage(initialLang); const savedTheme = localStorage.getItem('feelpost-theme'); applyTheme(savedTheme === 'dark' || (savedTheme !== 'light' && systemTheme.matches) ? 'dark' : 'light'); document.getElementById('copyright-year').textContent = new Date().getFullYear(); loadStars(); loadLatestRelease()
   </script>
 </body>
 </html>
