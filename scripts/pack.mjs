@@ -7,9 +7,9 @@ const builder = resolve(root, 'node_modules/electron-builder/cli.js')
 const args = [builder]
 
 if (process.platform === 'darwin') {
-  args.push('--mac', 'dmg', '-c.electronDist=node_modules/electron/dist')
+  args.push('--mac', 'dmg', '--publish', 'never', '-c.electronDist=node_modules/electron/dist')
 } else if (process.platform === 'win32') {
-  args.push('--win', 'nsis', '-c.electronDist=node_modules/electron/dist')
+  args.push('--win', 'nsis', '--publish', 'never', '-c.electronDist=node_modules/electron/dist')
 } else {
   console.error('npm run pack 只支持 macOS 和 Windows。')
   process.exit(1)
