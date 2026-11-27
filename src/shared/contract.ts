@@ -160,6 +160,15 @@ export interface AppInfo {
   contractVersion: number
 }
 
+export interface UpdateInfo {
+  currentVersion: string
+  latestVersion: string
+  hasUpdate: boolean
+  name: string
+  url: string
+  publishedAt: string | null
+}
+
 export interface Preferences {
   theme: 'light' | 'dark'
   dataDir: string
@@ -526,6 +535,7 @@ export interface FeelpostApi {
   app: {
     getInfo(): Promise<Result<AppInfo>>
     setZoomFactor(factor: number): Promise<Result<void>>
+    checkUpdate(): Promise<Result<UpdateInfo>>
   }
   settings: {
     get(): Promise<Result<Preferences>>
@@ -552,6 +562,7 @@ export interface FeelpostApi {
   }
   shell: {
     openPath(path: string): Promise<Result<void>>
+    openExternal(url: string): Promise<Result<void>>
   }
   project: {
     list(): Promise<Result<ProjectSummary[]>>

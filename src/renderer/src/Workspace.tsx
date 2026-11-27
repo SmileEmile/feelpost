@@ -14,7 +14,8 @@ import type {
   RequestDraft,
   ScanCandidate,
   ScanResult,
-  ScanRunSummary
+  ScanRunSummary,
+  UpdateInfo
 } from '@shared/contract'
 import { unwrap } from './api'
 import RequestPanel from './RequestPanel'
@@ -32,6 +33,7 @@ interface Props {
   project: ProjectDetail
   projects: ProjectSummary[]
   info: AppInfo | null
+  updateInfo?: UpdateInfo | null
   prefs: Preferences | null
   onPrefs: (prefs: Preferences) => void
   onBack: () => void
@@ -114,7 +116,7 @@ function firstInterface(tree: CatalogTree): InterfaceSummary | null {
   return tree.manual[0] ?? null
 }
 
-export default function Workspace({ project, projects, info, prefs, onPrefs, onBack, onSwitchProject, onCreateProject, onOpenProjectSettings, onChanged, notify, theme, onToggleTheme }: Props): JSX.Element {
+export default function Workspace({ project, projects, info, updateInfo, prefs, onPrefs, onBack, onSwitchProject, onCreateProject, onOpenProjectSettings, onChanged, notify, theme, onToggleTheme }: Props): JSX.Element {
   const [tree, setTree] = useState<CatalogTree | null>(null)
   const [tabs, setTabs] = useState<InterfaceDetail[]>([])
   const [activeTabId, setActiveTabId] = useState('')
@@ -1102,6 +1104,7 @@ export default function Workspace({ project, projects, info, prefs, onPrefs, onB
         </div>
         <span className="spacer" />
         {lastRun && <span className="small-note">上次扫描 {new Date(lastRun.finishedAt).toLocaleString()}</span>}
+        {updateInfo?.hasUpdate && <button className="btn ghost update-top-btn" onClick={() => void window.feelpost.shell.openExternal(updateInfo.url)}>新版本 v{updateInfo.latestVersion}</button>}
         <button className="btn primary scan-btn" onClick={() => void openScanScope()} title="扫描代码仓库"><Icon name="repo" size={15} />扫描代码仓库</button>
         <button
           className={`ai-top-btn ${prefs?.ai?.enabled ? 'on' : ''}`}

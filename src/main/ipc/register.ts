@@ -17,6 +17,7 @@ import { AISecretStore } from '../services/ai-secret-store'
 import { AIContextBuilder } from '../services/ai-context-builder'
 import { OpenAICompatibleProvider } from '../services/ai-provider'
 import { AIService } from '../services/ai-service'
+import { UpdateService } from '../services/update-service'
 
 interface Options {
   dataDir: string
@@ -232,6 +233,9 @@ export function registerIpc(options: Options): void {
     failed: (payload) => broadcast('scan:failed', payload),
     cancelled: (payload) => broadcast('scan:cancelled', payload)
   })
+
+  const updates = new UpdateService(options.version)
+  handle('app:checkUpdate', async () => updates.check())
 
   handle('app:getInfo', async () => ({
     version: options.version,

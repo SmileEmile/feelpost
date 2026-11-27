@@ -10,7 +10,8 @@ function on<T>(channel: string, listener: (payload: T) => void): () => void {
 const api: FeelpostApi = {
   app: {
     getInfo: () => ipcRenderer.invoke('app:getInfo'),
-    setZoomFactor: (factor) => ipcRenderer.invoke('app:setZoomFactor', { factor })
+    setZoomFactor: (factor) => ipcRenderer.invoke('app:setZoomFactor', { factor }),
+    checkUpdate: () => ipcRenderer.invoke('app:checkUpdate')
   },
   settings: {
     get: () => ipcRenderer.invoke('settings:get'),
@@ -36,7 +37,8 @@ const api: FeelpostApi = {
     chooseFile: () => ipcRenderer.invoke('dialog:chooseFile')
   },
   shell: {
-    openPath: (path) => ipcRenderer.invoke('shell:openPath', { path })
+    openPath: (path) => ipcRenderer.invoke('shell:openPath', { path }),
+    openExternal: (url) => ipcRenderer.invoke('shell:openExternal', { url })
   },
   project: {
     list: () => ipcRenderer.invoke('project:list'),

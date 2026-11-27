@@ -2702,3 +2702,27 @@ html[data-platform="darwin"] .onboarding-top { padding-left: 80px; }
 }
 .provider-logo svg { width: 16px !important; height: 16px !important; display: block; }
 .provider-logo svg path { fill: currentColor; }
+
+/* ---------- about links / update ---------- */
+.about-links { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
+.about-link {
+  display: flex; align-items: center; gap: 9px; width: 100%; min-width: 0;
+  padding: 8px 10px; border: 1px solid var(--border); border-radius: 6px;
+  background: var(--surface-2); color: var(--text-2); text-align: left; font: inherit;
+}
+.about-link:hover { border-color: color-mix(in srgb, var(--accent) 35%, var(--border)); background: var(--surface); }
+.about-link-label { flex: none; font-size: 11px; font-weight: 650; color: var(--text); min-width: 44px; }
+.about-link code { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--text-3); font-family: var(--mono); font-size: 10px; }
+.about-link-arrow { margin-left: auto; flex: none; color: var(--text-3); font-size: 12px; }
+.about-update-row { margin-top: 10px; border-top: 1px solid var(--border); padding-top: 12px; }
+.about-update-error { margin-top: 4px; color: var(--danger); font-size: 10.5px; }
+.author-wechat { display: flex; align-items: center; gap: 5px; margin-top: 5px; color: var(--text-3); font-size: 11px; }
+.author-wechat svg { flex: none; color: var(--ok); }
+.author-wechat code { margin-left: 1px; padding: 1px 5px; border-radius: 4px; background: var(--surface-2); color: var(--text-2); font-family: var(--mono); font-size: 10.5px; }
+
+.update-top-btn {
+  height: 30px; padding: 0 10px; border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
+  color: var(--accent); background: color-mix(in srgb, var(--accent) 7%, var(--surface));
+  font-size: 11px; font-weight: 600;
+}
+.update-top-btn:hover { background: color-mix(in srgb, var(--accent) 12%, var(--surface)); }

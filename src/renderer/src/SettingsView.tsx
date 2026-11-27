@@ -1,5 +1,5 @@
 import { useEffect, useState, type CSSProperties } from 'react'
-import type { AIConfig, AIConfigPublic, AppInfo, Preferences } from '@shared/contract'
+import type { AIConfig, AIConfigPublic, AppInfo, Preferences, UpdateInfo } from '@shared/contract'
 import { unwrap } from './api'
 import Message from './Message'
 import SelectMenu from './SelectMenu'
@@ -65,6 +65,15 @@ function SettingsIcon({ name }: { name: string }): JSX.Element {
   return <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{(paths[name] ?? paths.about).map((path) => <path key={path} d={path} />)}</svg>
 }
 
+function WechatIcon(): JSX.Element {
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M9.7 4.2c-3.6 0-6.6 2.4-6.6 5.4 0 1.7.9 3.2 2.4 4.2l-.6 2 2.2-1.1c.8.2 1.6.3 2.5.3.3 0 .6 0 .9-.1-.1-.4-.2-.8-.2-1.2 0-3 2.9-5.4 6.4-5.4h.4c-.7-2.4-3.5-4.1-6.8-4.1zm-2.3 3.4c-.5 0-.9-.4-.9-.9s.4-.9.9-.9.9.4.9.9-.4.9-.9.9zm4.7 0c-.5 0-.9-.4-.9-.9s.4-.9.9-.9.9.4.9.9-.4.9-.9.9z" />
+      <path d="M21.6 13.5c0-2.5-2.5-4.5-5.5-4.5s-5.5 2-5.5 4.5 2.5 4.5 5.5 4.5c.7 0 1.3-.1 1.9-.3l1.8.9-.5-1.6c1.4-.8 2.3-2 2.3-3.5zm-7.3-1.1c-.4 0-.7-.3-.7-.7s.3-.7.7-.7.7.3.7.7-.3.7-.7.7zm3.7 0c-.4 0-.7-.3-.7-.7s.3-.7.7-.7.7.3.7.7-.3.7-.7.7z" />
+    </svg>
+  )
+}
+
 function EyeIcon({ open }: { open: boolean }): JSX.Element {
   return open ? (
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -105,6 +114,10 @@ export default function SettingsView({ info, prefs, onPrefs, notify, focus, onFo
   const [aiModels, setAIModels] = useState<string[]>([])
   const [aiModelsLoading, setAIModelsLoading] = useState(false)
   const [aiModelsError, setAIModelsError] = useState('')
+  const [updateInfo, setUpdateInfo] = useState<UpdateInfo | null>(null)
+  const [updateChecking, setUpdateChecking] = useState(false)
+  const [updateError, setUpdateError] = useState('')
+  const [updateChecked, setUpdateChecked] = useState(false)
   const [showAIKey, setShowAIKey] = useState(false)
   const [settingsSection, setSettingsSection] = useState('appearance')
 
@@ -239,6 +252,28 @@ export default function SettingsView({ info, prefs, onPrefs, notify, focus, onFo
     const saved = await saveAI(next)
     if (!saved) setAIConfig(previous)
   }
+
+  async function checkUpdates(silent = false): Promise<void> {
+    setUpdateChecking(true)
+    setUpdateError('')
+    try {
+      const result = await unwrap(window.feelpost.app.checkUpdate())
+      setUpdateInfo(result)
+      setUpdateChecked(true)
+      if (!silent) notify(result.hasUpdate ? `发现新版本 v${result.latestVersion}` : '当前已是最新版本')
+    } catch (err) {
+      setUpdateError((err as Error).message)
+      if (!silent) notify((err as Error).message)
+    } finally {
+      setUpdateChecking(false)
+    }
+  }
+
+  useEffect(() => {
+    void checkUpdates(true)
+    // 只在设置页首次打开时自动检查一次；UpdateService 内部会缓存结果。
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   async function testAI(): Promise<void> {
     if (!aiConfig) return
@@ -530,14 +565,48 @@ export default function SettingsView({ info, prefs, onPrefs, notify, focus, onFo
       <section id="settings-about" className="settings-panel">
         <h3>关于</h3>
         <div className="settings-row">
-          <div><strong>FeelPost</strong><p className="small-note">本地接口契约中枢 · {platform}</p></div>
+          <div><strong>FeelPost</strong><p className="small-note">开源 · 本地 · AI 协作的 API 接口测试工具 · {platform}</p></div>
           <span className="spacer" />
           <span className="chip muted">v{info?.version ?? '—'}</span>
         </div>
         <p className="small-note">升级不会清空数据目录。</p>
+
+        <div className="about-links">
+          <button className="about-link" onClick={() => void window.feelpost.shell.openExternal('https://smileemile.github.io/feelpost/')} title="打开官网">
+            <span className="about-link-label">官网</span>
+            <code>https://smileemile.github.io/feelpost/</code>
+            <span className="about-link-arrow">↗</span>
+          </button>
+          <button className="about-link" onClick={() => void window.feelpost.shell.openExternal('https://github.com/smileemile/feelpost/')} title="打开 GitHub 仓库">
+            <span className="about-link-label">GitHub</span>
+            <code>https://github.com/smileemile/feelpost/</code>
+            <span className="about-link-arrow">↗</span>
+          </button>
+        </div>
+
+        <div className="settings-row about-update-row">
+          <div>
+            <strong>版本更新</strong>
+            <p className="small-note">
+              {updateInfo?.hasUpdate
+                ? `发现新版本 v${updateInfo.latestVersion}，当前 v${updateInfo.currentVersion}。`
+                : updateChecked
+                  ? '当前已是最新版本。'
+                  : '从 GitHub Releases 检查版本。'}
+            </p>
+          </div>
+          <span className="spacer" />
+          {updateInfo?.hasUpdate ? (
+            <button className="btn primary small" onClick={() => void window.feelpost.shell.openExternal(updateInfo.url)}>下载 v{updateInfo.latestVersion}</button>
+          ) : (
+            <button className="btn small" disabled={updateChecking} onClick={() => void checkUpdates()}>{updateChecking ? '检查中…' : '检查更新'}</button>
+          )}
+        </div>
+        {updateError && <p className="about-update-error">{updateError}</p>}
+
         <div className="settings-author">
           <strong>作者：Emile（爱弥儿）</strong>
-          <p className="author-wechat">微信号：<code>SmileEmile</code></p>
+          <p className="author-wechat" title="微信：SmileEmile"><WechatIcon /><code>SmileEmile</code></p>
         </div>
       </section>
         </div>

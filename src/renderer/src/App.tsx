@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import type { AppInfo, Preferences, ProjectDetail, ProjectSummary } from '@shared/contract'
+import type { AppInfo, Preferences, ProjectDetail, ProjectSummary, UpdateInfo } from '@shared/contract'
 import { unwrap } from './api'
 import Workspace from './Workspace'
 import brandIcon from './assets/brand.svg'
@@ -23,6 +23,7 @@ const EMPTY_FORM: FormState = {
 
 export default function App(): JSX.Element {
   const [info, setInfo] = useState<AppInfo | null>(null)
+  const [updateInfo, setUpdateInfo] = useState<UpdateInfo | null>(null)
   const [prefs, setPrefs] = useState<Preferences | null>(null)
   const [projects, setProjects] = useState<ProjectSummary[]>([])
   const [selected, setSelected] = useState<ProjectDetail | null>(null)
@@ -62,6 +63,16 @@ export default function App(): JSX.Element {
         setLoading(false)
       }
     })()
+  }, [])
+
+  useEffect(() => {
+    let active = true
+    void window.feelpost.app.checkUpdate()
+      .then((result) => {
+        if (active && result.ok && result.data.hasUpdate) setUpdateInfo(result.data)
+      })
+      .catch(() => undefined)
+    return () => { active = false }
   }, [])
 
   useEffect(() => {
@@ -199,6 +210,11 @@ export default function App(): JSX.Element {
           <span className="chip muted">本地 · 离线</span>
         </div>
         <div className="spacer" />
+        {updateInfo?.hasUpdate && (
+          <button className="btn ghost update-top-btn" onClick={() => void window.feelpost.shell.openExternal(updateInfo.url)}>
+            新版本 v{updateInfo.latestVersion}
+          </button>
+        )}
         <button className="btn ghost" onClick={() => void switchTheme()}>
           {prefs?.theme === 'dark' ? '浅色' : '深色'}
         </button>
@@ -213,6 +229,7 @@ export default function App(): JSX.Element {
           project={selected}
           projects={projects}
           info={info}
+          updateInfo={updateInfo}
           prefs={prefs}
           onPrefs={setPrefs}
           onBack={() => setSelected(null)}
