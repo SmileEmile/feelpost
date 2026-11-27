@@ -80,6 +80,21 @@
     .flow-pulse { position:absolute; left:50%; top:-8px; width:6px; height:6px; margin-left:-3px; border-radius:999px; background:#60a5fa; box-shadow:0 0 0 4px rgba(59,130,246,.12), 0 0 16px rgba(96,165,250,.9); animation:flow-pulse 4.8s cubic-bezier(.45,0,.25,1) infinite; }
     @keyframes flow-pulse { 0% { top:-8px; opacity:0; } 10% { opacity:1; } 84% { opacity:1; } 100% { top:106%; opacity:0; } }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } .hero-orb,.hero-aurora,.float-badge { animation:none; } #particles,.hero-cursor-glow,.flow-pulse { display:none; } .hero-window { transform:none; } *,*::before,*::after { transition-duration:.01ms!important; } }
+    .preview-compare { margin-left:0; margin-right:0; }
+    .compare-stage { position:relative; overflow:hidden; width:100%; aspect-ratio: 2720 / 1760; border:1px solid rgba(226,232,240,.95); border-radius:16px; background:#0b0f14; box-shadow:0 24px 70px rgba(15,23,42,.14); touch-action:none; }
+    .dark .compare-stage { border-color:rgba(255,255,255,.10); box-shadow:0 24px 70px rgba(0,0,0,.35); }
+    .compare-image { position:absolute; inset:0; width:100%; height:100%; display:block; object-fit:cover; object-position:top center; user-select:none; -webkit-user-drag:none; }
+    .compare-light { position:absolute; inset:0; clip-path: inset(0 calc(100% - var(--compare, 50%)) 0 0); will-change:clip-path; }
+    .compare-divider { position:absolute; top:0; bottom:0; left:var(--compare,50%); width:2px; transform:translateX(-1px); background:rgba(255,255,255,.95); box-shadow:0 0 0 1px rgba(15,23,42,.16), 0 0 24px rgba(15,23,42,.28); pointer-events:none; z-index:3; }
+    .compare-handle { position:absolute; top:50%; left:50%; display:grid; place-items:center; width:42px; height:42px; transform:translate(-50%,-50%); border:1px solid rgba(15,23,42,.12); border-radius:999px; background:#fff; color:#475569; font-size:16px; box-shadow:0 8px 24px rgba(15,23,42,.22); }
+    .compare-range { position:absolute; inset:0; z-index:5; width:100%; height:100%; margin:0; opacity:0; cursor:ew-resize; }
+    .compare-range::-webkit-slider-thumb { -webkit-appearance:none; appearance:none; width:44px; height:100%; cursor:ew-resize; }
+    .compare-chip { position:absolute; top:14px; z-index:4; padding:5px 9px; border-radius:999px; border:1px solid rgba(255,255,255,.22); background:rgba(15,23,42,.44); color:#fff; font-size:10px; font-weight:600; letter-spacing:.04em; backdrop-filter:blur(8px); pointer-events:none; }
+    .compare-chip.light { left:14px; }
+    .compare-chip.dark { right:14px; }
+    .compare-caption { margin-top:12px; text-align:center; color:#64748b; font-size:11px; }
+    .dark .compare-caption { color:#94a3b8; }
+    @media (max-width: 640px) { .compare-handle { width:34px; height:34px; font-size:14px; } .compare-chip { top:10px; } .compare-chip.light { left:10px; } .compare-chip.dark { right:10px; } }
   </style>
   <script>
     (function(){try{var s=localStorage.getItem('feelpost-theme');var d=s==='dark'||(s!=='light'&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d)}catch(e){}})()
@@ -506,14 +521,18 @@
           <h2 class="mt-3 text-[26px] font-bold tracking-[-0.025em] sm:text-[32px]" data-i18n="preview.title">每天用的工作台，长这样</h2>
           <p class="mt-4 text-[13px] leading-6 text-slate-600 dark:text-slate-300" data-i18n="preview.lead">左边接口树，右边请求和响应，用例、文档都在顺手的位置。</p>
         </div>
-        <figure class="mt-8 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl shadow-slate-900/[0.06] dark:border-white/10 dark:bg-[#10161e]">
-          <div class="flex items-center gap-2 border-b border-slate-200 bg-slate-50/90 px-4 py-3 dark:border-white/[0.07] dark:bg-white/[0.03]"><span class="h-2.5 w-2.5 rounded-full bg-[#ff5f57]"></span><span class="h-2.5 w-2.5 rounded-full bg-[#febc2e]"></span><span class="h-2.5 w-2.5 rounded-full bg-[#28c840]"></span><span class="ml-3 rounded-md border border-slate-200 bg-white px-3 py-1 font-mono text-[10px] text-slate-400 dark:border-white/10 dark:bg-white/5">feelpost / api-test</span></div>
-          <!-- 【此处替换】产品截图：建议替换为 1600x1000 左右的真实截图 -->
-          <div class="relative grid min-h-[300px] grid-cols-1 gap-4 p-4 sm:grid-cols-[180px_1fr] sm:p-5">
-            <div class="hidden flex-col gap-2 rounded-lg border border-slate-200/70 bg-slate-50/70 p-3 sm:flex dark:border-white/[0.06] dark:bg-white/[0.02]"><div class="mb-1 flex items-center justify-between"><span class="text-[10px] font-semibold text-slate-400">接口</span><span class="h-4 w-4 rounded bg-slate-200/70 dark:bg-white/10"></span></div><div class="h-6 rounded bg-slate-200/60 dark:bg-white/[0.06]"></div><div class="mt-2 space-y-1.5"><div class="flex items-center gap-2 rounded bg-white px-2 py-1.5 shadow-sm dark:bg-white/[0.05]"><span class="h-2.5 w-6 rounded-full bg-emerald-200 dark:bg-emerald-500/30"></span><span class="h-1.5 flex-1 rounded bg-slate-200 dark:bg-white/10"></span></div><div class="flex items-center gap-2 px-2 py-1.5"><span class="h-2.5 w-6 rounded-full bg-amber-200 dark:bg-amber-500/30"></span><span class="h-1.5 flex-1 rounded bg-slate-200/80 dark:bg-white/[0.08]"></span></div><div class="flex items-center gap-2 px-2 py-1.5"><span class="h-2.5 w-6 rounded-full bg-sky-200 dark:bg-sky-500/30"></span><span class="h-1.5 flex-1 rounded bg-slate-200/80 dark:bg-white/[0.08]"></span></div></div></div>
-            <div class="flex flex-col rounded-lg border border-slate-200/70 bg-white p-3 dark:border-white/[0.06] dark:bg-white/[0.02]"><div class="flex items-center gap-2 border-b border-slate-100 pb-3 dark:border-white/[0.06]"><span class="rounded bg-emerald-100 px-2 py-1 font-mono text-[9px] font-bold text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300">GET</span><span class="h-2 w-2/5 rounded bg-slate-200 dark:bg-white/10"></span><span class="ml-auto h-6 w-14 rounded bg-brand-600/90"></span></div><div class="mt-3 flex gap-2 text-[9px] text-slate-400"><span class="border-b-2 border-brand-600 pb-1 font-medium text-brand-600">Headers</span><span>Query</span><span>Body</span><span>响应</span></div><div class="mt-3 grid gap-2 sm:grid-cols-3"><div class="h-14 rounded-md bg-slate-100/80 dark:bg-white/[0.04]"></div><div class="h-14 rounded-md bg-slate-100/80 dark:bg-white/[0.04]"></div><div class="h-14 rounded-md bg-slate-100/80 dark:bg-white/[0.04]"></div></div><div class="mt-3 h-24 rounded-md border border-dashed border-slate-200 bg-slate-50/60 dark:border-white/10 dark:bg-white/[0.02]"></div></div>
-            <span class="pointer-events-none absolute bottom-3 right-4 rounded-full border border-slate-200 bg-white/90 px-2.5 py-1 text-[9px] font-medium text-slate-400 shadow-sm backdrop-blur dark:border-white/10 dark:bg-black/40" data-i18n="preview.placeholder">产品截图占位</span>
+        <figure class="preview-compare mt-8">
+          <div class="compare-stage" data-compare style="--compare: 50%">
+            <img class="compare-image" src="resources/home-page/dark.png" alt="FeelPost 深色模式工作台" draggable="false" loading="lazy" decoding="async" />
+            <div class="compare-light">
+              <img class="compare-image" src="resources/home-page/light.png" alt="FeelPost 浅色模式工作台" draggable="false" loading="lazy" decoding="async" />
+            </div>
+            <div class="compare-divider" aria-hidden="true"><span class="compare-handle">↔</span></div>
+            <input class="compare-range" type="range" min="0" max="100" value="50" step="0.1" aria-label="拖动对比浅色与深色模式" />
+            <span class="compare-chip light" data-i18n="preview.light">浅色</span>
+            <span class="compare-chip dark" data-i18n="preview.dark">深色</span>
           </div>
+          <figcaption class="compare-caption" data-i18n="preview.compare">拖动中间滑块，对比浅色与深色模式。</figcaption>
         </figure>
       </div>
     </section>
@@ -574,7 +593,7 @@
         'docs.copy': '复制', 'flow.source': 'Spring Boot 源码', 'flow.scan': '生成接口资产', 'flow.debug': '本地调试', 'flow.handoff': '交付给前端 / AI', 'quick.eyebrow': '本地部署', 'quick.title': '想从源码跑，命令都在这儿', 'quick.lead': '不想用安装包，或者想自己构建客户端，直接照下面来。', 'download.choose': '选择平台', 'download.cta': '下载客户端', 'download.all': '所有版本',
         'install.title': '本地部署', 'install.copy': '复制命令', 'install.note': '安装包从 GitHub Releases 下载；这里是从源码运行与本地打包。',
         'download.macDesc': 'Apple Silicon / Intel · 原生客户端', 'download.macArm': 'Apple Silicon 芯片', 'download.macIntel': 'Intel 芯片', 'download.winSetup': '安装版 · x64', 'download.winPortable': '便携版 · x64', 'download.winDesc': '安装版 · x64', 'download.note': 'macOS .dmg / Windows .exe，直接从 GitHub Releases 下载。当前包未签名，系统会提示确认。',
-        'preview.eyebrow': '产品预览', 'preview.title': '每天用的工作台，长这样', 'preview.lead': '左边接口树，右边请求和响应，用例、文档都在顺手的位置。', 'preview.placeholder': '产品截图占位',
+        'preview.eyebrow': '产品预览', 'preview.title': '每天用的工作台，长这样', 'preview.lead': '左边接口树，右边请求和响应，用例、文档都在顺手的位置。', 'preview.placeholder': '产品截图占位', 'preview.light': '浅色', 'preview.dark': '深色', 'preview.compare': '拖动中间滑块，对比浅色与深色模式。',
         'contribute.eyebrow': '一起共建', 'contribute.title': '一起把它做得更好用', 'contribute.lead': '如果它帮你少加班了，欢迎点个 Star；遇到问题直接提 Issue，想改哪里就发 PR。', 'contribute.star': 'Star on GitHub', 'contribute.issue': '提交 Issue',
         'footer.tagline': '开源 · 本地 · AI 协作的 API 接口测试工具', 'footer.docs': '文档', 'footer.author': '作者：Emile',
         'toast.copied': '已复制到剪贴板', 'theme.toggle': '切换主题', 'lang.label': '语言', 'menu.open': '打开菜单', 'menu.close': '关闭菜单'
@@ -597,7 +616,7 @@
         'docs.copy': 'Copy', 'flow.source': 'Spring Boot source', 'flow.scan': 'Scan APIs', 'flow.debug': 'Local debug', 'flow.handoff': 'Handoff to frontend / AI', 'quick.eyebrow': 'Local setup', 'quick.title': 'Prefer the source? The commands are here', 'quick.lead': 'Skip the installer or build the client yourself. Start here.', 'download.choose': 'Choose a platform', 'download.cta': 'Download the app', 'download.all': 'All releases',
         'install.title': 'Local setup', 'install.copy': 'Copy command', 'install.note': 'Installers come from GitHub Releases; this section is for running and packaging from source.',
         'download.macDesc': 'Apple Silicon / Intel · Native client', 'download.macArm': 'Apple Silicon', 'download.macIntel': 'Intel', 'download.winSetup': 'Installer · x64', 'download.winPortable': 'Portable · x64', 'download.winDesc': 'Installer · x64', 'download.note': 'macOS .dmg / Windows .exe, straight from GitHub Releases. Current builds are unsigned, so your OS may ask for confirmation.',
-        'preview.eyebrow': 'Product preview', 'preview.title': 'The workbench you will actually use', 'preview.lead': 'API tree on the left, request and response on the right, with cases and docs within reach.', 'preview.placeholder': 'Screenshot placeholder',
+        'preview.eyebrow': 'Product preview', 'preview.title': 'The workbench you will actually use', 'preview.lead': 'API tree on the left, request and response on the right, with cases and docs within reach.', 'preview.placeholder': 'Screenshot placeholder', 'preview.light': 'Light', 'preview.dark': 'Dark', 'preview.compare': 'Drag the divider to compare light and dark mode.',
         'contribute.eyebrow': 'Build it with us', 'contribute.title': 'Help make it better', 'contribute.lead': 'If FeelPost saves you some overtime, give it a Star. Found a bug? Open an Issue. Want to fix something? Send a PR.', 'contribute.star': 'Star on GitHub', 'contribute.issue': 'Open an Issue',
         'footer.tagline': 'Open-source · Local · AI-assisted API testing', 'footer.docs': 'Docs', 'footer.author': 'Author: Emile',
         'toast.copied': 'Copied to clipboard', 'theme.toggle': 'Toggle theme', 'lang.label': 'Language', 'menu.open': 'Open menu', 'menu.close': 'Close menu'
@@ -620,7 +639,7 @@
         'docs.copy': 'コピー', 'flow.source': 'Spring Boot ソース', 'flow.scan': 'API をスキャン', 'flow.debug': 'ローカルデバッグ', 'flow.handoff': 'フロント / AI へ引き渡し', 'quick.eyebrow': 'ローカルセットアップ', 'quick.title': 'ソースから動かす場合はこちら', 'quick.lead': 'インストーラーを使わず、自分でビルドする場合の手順です。', 'download.choose': 'プラットフォームを選択', 'download.cta': 'クライアントをダウンロード', 'download.all': 'すべてのリリース',
         'install.title': 'ローカルセットアップ', 'install.copy': 'コマンドをコピー', 'install.note': 'インストーラーは GitHub Releases から取得できます。ここではソースからの起動とパッケージ作成を説明します。',
         'download.macDesc': 'Apple Silicon / Intel · ネイティブクライアント', 'download.macArm': 'Apple Silicon', 'download.macIntel': 'Intel', 'download.winSetup': 'インストーラー · x64', 'download.winPortable': 'ポータブル · x64', 'download.winDesc': 'インストーラー · x64', 'download.note': 'macOS の .dmg / Windows の .exe を GitHub Releases から取得できます。現在は未署名のため、OS の確認が出る場合があります。',
-        'preview.eyebrow': '製品プレビュー', 'preview.title': '毎日使うワークベンチは、こんな感じ', 'preview.lead': '左に API ツリー、右にリクエストとレスポンス。ケースもドキュメントも手の届く場所に。', 'preview.placeholder': 'スクリーンショット（差し替え）',
+        'preview.eyebrow': '製品プレビュー', 'preview.title': '毎日使うワークベンチは、こんな感じ', 'preview.lead': '左に API ツリー、右にリクエストとレスポンス。ケースもドキュメントも手の届く場所に。', 'preview.placeholder': 'スクリーンショット（差し替え）', 'preview.light': 'ライト', 'preview.dark': 'ダーク', 'preview.compare': '中央のスライダーをドラッグしてライトとダークを比較。',
         'contribute.eyebrow': '一緒に作る', 'contribute.title': 'もっと使いやすくしよう', 'contribute.lead': 'FeelPost が役に立ったら Star をお願いします。不具合は Issue、修正は PR で歓迎します。', 'contribute.star': 'GitHub で Star', 'contribute.issue': 'Issue を作成',
         'footer.tagline': 'オープンソース · ローカル · AI 協調 API テストツール', 'footer.docs': 'ドキュメント', 'footer.author': '作者：Emile',
         'toast.copied': 'クリップボードにコピーしました', 'theme.toggle': 'テーマを切り替え', 'lang.label': '言語', 'menu.open': 'メニューを開く', 'menu.close': 'メニューを閉じる'
@@ -850,6 +869,18 @@
     })()
     const savedLang = localStorage.getItem('feelpost-lang'); const browserLang = (navigator.language || '').toLowerCase(); const initialLang = I18N[savedLang] ? savedLang : browserLang.startsWith('ja') ? 'ja' : browserLang.startsWith('zh') ? 'zh' : 'en'
     setLanguage(initialLang); const savedTheme = localStorage.getItem('feelpost-theme'); applyTheme(savedTheme === 'dark' || (savedTheme !== 'light' && systemTheme.matches) ? 'dark' : 'light'); document.getElementById('copyright-year').textContent = new Date().getFullYear(); loadStars(); loadLatestRelease()
+
+    ;(function initThemeCompare() {
+      const stage = document.querySelector('[data-compare]')
+      if (!stage) return
+      const range = stage.querySelector('.compare-range')
+      if (!range) return
+      const sync = () => stage.style.setProperty('--compare', `${range.value}%`)
+      range.addEventListener('input', sync)
+      range.addEventListener('change', sync)
+      stage.addEventListener('dblclick', () => { range.value = '50'; sync() })
+      sync()
+    })()
   </script>
 </body>
 </html>
