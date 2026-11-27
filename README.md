@@ -15,6 +15,7 @@
   <img src="https://img.shields.io/badge/Electron-33-47848f" alt="Electron" />
   <img src="https://img.shields.io/badge/React-18-61dafb" alt="React" />
   <img src="https://img.shields.io/badge/TypeScript-5-3178c6" alt="TypeScript" />
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-2ea44f" alt="MIT License" /></a>
 </p>
 
 FeelPost 是一个运行在本机的桌面工具，用来把 Spring Boot 后端接口从源码整理成前端可以直接使用的契约文档。
@@ -251,6 +252,14 @@ npm run build
 
 如果是界面改动，建议附上修改前后的截图。
 
+## 支持项目
+
+FeelPost 开源免费，任何人都可以自由下载、使用、修改和分发。
+
+如果这个项目对你有帮助，欢迎自愿打赏支持作者持续维护开发。打赏完全自愿，不提供额外功能、权限或服务承诺。
+
 ## License
 
-本项目当前未声明开源许可证（`package.json` 中为 `UNLICENSED`）。如需开源或商用分发，请先补充明确的 `LICENSE` 文件。
+本项目采用 [MIT License](LICENSE) 开源。
+
+Copyright (c) 2026 Emile

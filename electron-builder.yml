@@ -1,11 +1,13 @@
 appId: dev.feelpost.app
 productName: FeelPost
+copyright: Copyright © 2026 Emile
 directories:
   buildResources: resources
   output: release
 files:
   - out/**
   - package.json
+  - LICENSE
 extraResources:
   - from: resources/grammars
     to: grammars
