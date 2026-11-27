@@ -3,6 +3,7 @@ import type { AIConfig, AIConfigPublic, AppInfo, Preferences, UpdateInfo } from 
 import { unwrap } from './api'
 import Message from './Message'
 import SelectMenu from './SelectMenu'
+import brandIcon from './assets/brand.svg'
 import openaiIcon from '../../../resources/icon-ai/openai.svg?raw'
 import claudeIcon from '../../../resources/icon-ai/claude.svg?raw'
 import geminiIcon from '../../../resources/icon-ai/gemini.svg?raw'
@@ -63,6 +64,14 @@ function SettingsIcon({ name }: { name: string }): JSX.Element {
     about: ['M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z', 'M12 11v5M12 8h.01']
   }
   return <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{(paths[name] ?? paths.about).map((path) => <path key={path} d={path} />)}</svg>
+}
+
+function GithubIcon(): JSX.Element {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 .8a11.2 11.2 0 0 0-3.5 21.8c.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.8 2.7 1.3 3.3 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.6-2.8 5.5-5.4 5.8.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6A11.2 11.2 0 0 0 12 .8z" />
+    </svg>
+  )
 }
 
 function WechatIcon(): JSX.Element {
@@ -353,7 +362,6 @@ export default function SettingsView({ info, prefs, onPrefs, notify, focus, onFo
 
   const dataDir = info?.dataDir ?? prefs?.dataDir ?? ''
   const logDir = dataDir ? `${dataDir.replace(/[\\/]+$/, '')}/logs` : ''
-  const platform = info?.platform === 'darwin' ? 'macOS' : info?.platform === 'win32' ? 'Windows' : info?.platform ?? '—'
   const aiBaseReady = Boolean(aiConfig?.baseUrl.trim())
   const aiModelReady = Boolean(aiConfig?.model.trim())
   const aiKeyReady = Boolean(aiKey.trim() || aiConfig?.hasApiKey || (aiConfig && isLocalBaseUrl(aiConfig.baseUrl)))
@@ -565,22 +573,20 @@ export default function SettingsView({ info, prefs, onPrefs, notify, focus, onFo
       <section id="settings-about" className="settings-panel">
         <h3>关于</h3>
         <div className="settings-row">
-          <div><strong>FeelPost</strong><p className="small-note">开源 · 本地 · AI 协作的 API 接口测试工具 · {platform}</p></div>
+          <div><strong>FeelPost</strong><p className="small-note">开源 · 本地 · AI 协作的 API 接口测试工具</p></div>
           <span className="spacer" />
           <span className="chip muted">v{info?.version ?? '—'}</span>
         </div>
         <p className="small-note">升级不会清空数据目录。</p>
 
-        <div className="about-links">
-          <button className="about-link" onClick={() => void window.feelpost.shell.openExternal('https://smileemile.github.io/feelpost/')} title="打开官网">
-            <span className="about-link-label">官网</span>
-            <code>https://smileemile.github.io/feelpost/</code>
-            <span className="about-link-arrow">↗</span>
+        <div className="about-social" aria-label="项目链接">
+          <button className="about-social-btn" onClick={() => void window.feelpost.shell.openExternal('https://smileemile.github.io/feelpost/')} title="打开官网" aria-label="打开官网">
+            <img src={brandIcon} alt="" />
+            <span>官网</span>
           </button>
-          <button className="about-link" onClick={() => void window.feelpost.shell.openExternal('https://github.com/smileemile/feelpost/')} title="打开 GitHub 仓库">
-            <span className="about-link-label">GitHub</span>
-            <code>https://github.com/smileemile/feelpost/</code>
-            <span className="about-link-arrow">↗</span>
+          <button className="about-social-btn github" onClick={() => void window.feelpost.shell.openExternal('https://github.com/smileemile/feelpost/')} title="打开 GitHub 仓库" aria-label="打开 GitHub 仓库">
+            <GithubIcon />
+            <span>GitHub</span>
           </button>
         </div>
 
