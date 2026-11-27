@@ -1,174 +1,256 @@
-# FeelPost
+<p align="center">
+  <img src="resources/icon.png" width="96" alt="FeelPost icon" />
+</p>
 
-面向 AI 协作开发的本地接口契约中枢：从 Spring Boot 源码产接口契约，本机调试，导出 md 给 AI 前端。
+<h1 align="center">FeelPost</h1>
 
-> 当前阶段：**内部 Alpha**。扫描 → 接口资产 → 环境 → 调试 → 用例 → 文档/导出主链路已完成，正在做产品化收尾。
+<p align="center">
+  本地优先的 Spring Boot 接口契约中枢<br />
+  扫描源码 · 调试接口 · 沉淀用例 · 导出可交付的 Markdown 文档
+</p>
 
-## 技术栈
+<p align="center">
+  <a href="https://github.com/SmileEmile/feelpost/releases"><img src="https://img.shields.io/github/v/release/SmileEmile/feelpost" alt="Release" /></a>
+  <a href="https://github.com/SmileEmile/feelpost/actions/workflows/build.yml"><img src="https://github.com/SmileEmile/feelpost/actions/workflows/build.yml/badge.svg" alt="Build" /></a>
+  <img src="https://img.shields.io/badge/Electron-33-47848f" alt="Electron" />
+  <img src="https://img.shields.io/badge/React-18-61dafb" alt="React" />
+  <img src="https://img.shields.io/badge/TypeScript-5-3178c6" alt="TypeScript" />
+</p>
 
-- Electron 33 + React 18 + TypeScript 5
-- electron-vite（主进程 / preload / 渲染进程三端构建）+ Vite 5
-- 本地 JSON 文件存储（原子写）
-- zod 校验 IPC 入参；electron-log 日志
-- web-tree-sitter（WASM）Java 扫描、undici 请求引擎
-- 进行中：AI 模块（Phase 0–3 已完成：字段说明 Diff、AI 用例；前端交付统一走用例 AI 导出）、代码签名 / 公证
+FeelPost 是一个运行在本机的桌面工具，用来把 Spring Boot 后端接口从源码整理成前端可以直接使用的契约文档。
 
-## 官网截图示例
+它不依赖云端服务，项目、接口、环境、用例和响应示例都保存在本地。AI 是可选项，不开启 AI 也能完成扫描、调试、用例和普通 Markdown 导出。
 
-仓库内置一套可重建的演示数据，适合官网/宣传截图：
+## 截图
+
+| 接口调试 | 用例管理 | 文档导出 |
+| --- | --- | --- |
+| ![接口调试](docs/design/assets/workspace-scan.png) | ![用例管理](docs/design/assets/cases-workspace.png) | ![文档导出](docs/design/assets/docs-workspace.png) |
+
+## 核心能力
+
+- **源码扫描**：解析 Spring Boot Controller、请求方法、路径、参数、DTO、Javadoc 和校验注解。
+- **接口资产**：按模块 / 包 / 手工目录组织接口，支持搜索、方法筛选、变更确认和人工校正。
+- **本地调试**：编辑 Path、Query、Header、Body、Cookie，按环境执行请求，查看响应、耗时、大小和状态。
+- **环境管理**：前置 URL、TLS、代理、超时、环境参数和全局参数，支持参数合并预览。
+- **用例沉淀**：把当前请求冻结为用例，保留标签、备注、请求快照和响应示例。
+- **文档导出**：按接口生成 Markdown，支持筛选、预览、源码查看、复制、导出和渐进加载。
+- **字段说明**：手动填写字段说明，或用 AI 生成 Diff 后选择性应用。
+- **AI 用例**：根据接口契约生成候选用例，预览、调整标签后导入当前环境。
+- **AI 联调文档**：按标签选择用例，按接口分批生成结构化 Markdown，支持本地缓存和失败批次重试。
+- **普通导出**：不调用 AI，直接导出已保存用例的请求和响应信息。
+- **本地优先**：无登录、无云端依赖；API Key 使用系统安全存储。
+
+## 下载
+
+从 [Releases](https://github.com/SmileEmile/feelpost/releases) 下载对应平台安装包：
+
+- macOS：`.dmg`（Apple Silicon / Intel）
+- Windows：NSIS 安装包 `.exe`
+- Windows Portable：免安装 `.exe`
+
+当前安装包未做代码签名，首次运行可能被系统提示；正式分发前需要补签名。
+
+## 快速开始
+
+要求：
+
+- Node.js >= 20
+- macOS 或 Windows
 
 ```bash
-npm run demo:seed
-npm run demo:dev
+git clone https://github.com/SmileEmile/feelpost.git
+cd feelpost
+npm install
+npm run dev
 ```
 
-演示项目：`零售业务中台`
+开发模式会启动 Electron 主进程、preload 和 React 界面。
 
-- 源码扫描接口：13 个（用户、订单、告警、健康检查）；
-- 手动接口：3 个（外部系统 / 开放平台）；
-- 环境：本地、测试环境、预发布；
-- 响应示例：用户详情、订单列表；
-- 用例：2 个。
+## 使用流程
 
-演示源码在：
+1. 新建项目，选择本地 Spring Boot 源码目录。
+2. 扫描代码仓库，确认接口候选并入库。
+3. 配置本地/测试/生产环境。
+4. 打开接口，编辑参数并发送请求。
+5. 保存响应示例，把请求保存为用例。
+6. 在文档页预览和导出 Markdown。
+7. 如需 AI，在设置中配置模型服务商后使用字段说明、AI 用例和 AI 文档导出。
+
+## AI 配置
+
+FeelPost 使用 OpenAI-compatible 接口，支持主流国内外服务商：
+
+- DeepSeek
+- 通义千问
+- 智谱 GLM
+- Kimi
+- SiliconFlow
+- Ollama（本地）
+- OpenAI
+- Anthropic Claude
+- Google Gemini
+- OpenRouter
+- 自定义 / 兼容接口
+
+设置页可以选择服务商，自动填入 Base URL 和默认模型；点击「获取模型」可从服务商 `/models` 接口拉取可用模型。通常只需要填写 API Key。
+
+AI 相关行为：
+
+- AI 默认关闭，核心功能不依赖 AI；
+- 请求前会展示脱敏后的上下文，不发送源码；
+- API Key 只保存在本机；
+- 发送前会剔除敏感 Header、Cookie 和查询参数；
+- AI 结果先预览，不会自动写入接口资产；
+- 修改配置后需要重新测试连接。
+
+## 数据与隐私
+
+默认数据目录：
 
 ```text
-examples/screenshot-demo
+~/Documents/feelpost
 ```
 
-数据目录为 `.demo-data/`，不会影响日常项目数据。重新生成演示数据时再次执行 `npm run demo:seed` 即可。
-
-## 环境要求
-
-- Node.js **>= 20**（仓库内的 `.tools/` 是本机自带的 Node 22，已被 `.gitignore` 忽略，不随仓库分发）
-- macOS / Windows
+可以通过环境变量覆盖：
 
 ```bash
-# 本机系统 Node 是 14，可用仓库内工具链：
-export PATH="$PWD/.tools/node/bin:$PATH"
-
-npm install
-npm run dev        # 启动 Electron 开发模式
+FEELPOST_DATA_DIR=/path/to/data
 ```
 
-> 如果终端里存在 `ELECTRON_RUN_AS_NODE=1`，Electron 会以 Node 模式启动而不是应用：
-> 先 `unset ELECTRON_RUN_AS_NODE` 再执行 `npm run dev`。
+数据全部是本地 JSON 文件，可以直接整目录备份或迁移。应用不包含账号系统、云同步或远程遥测。
 
-## 常用命令
+> 注意：扫描只读取源码文件，不执行源码；请求会按你配置的环境真实发送到目标地址。
 
-| 命令 | 说明 |
-|---|---|
-| `npm run dev` | Electron 开发模式（渲染进程 HMR） |
-| `npm run build` | 构建 main / preload / renderer 到 `out/` |
-| `npm run typecheck` | 主进程与渲染进程 TypeScript 检查 |
-| `npm test` | Vitest 单元测试（领域规则 + 项目存储） |
-| `npm run release:check` | 校验版本号并生成 `release-notes.md` |
-| `npm run pack` / `npm run dist` | electron-builder 打包（未签名） |
+## 技术架构
 
-## 环境变量
+```text
+┌─────────────────────────────────────────────┐
+│ Electron Renderer                           │
+│ React 18 · TypeScript · CSS                 │
+└──────────────────────┬──────────────────────┘
+                       │ window.feelpost
+┌──────────────────────▼──────────────────────┐
+│ Preload                                     │
+│ contextBridge · typed IPC API               │
+└──────────────────────┬──────────────────────┘
+                       │ IPC + zod validation
+┌──────────────────────▼──────────────────────┐
+│ Electron Main                               │
+│ Project / Catalog / Environment / Request   │
+│ Case / Example / Document / AI / Settings   │
+│                                              │
+│ ScanService ── worker_threads ── tree-sitter│
+└──────────────────────┬──────────────────────┘
+                       │ atomic JSON files
+                       ▼
+              ~/Documents/feelpost
+```
 
-| 变量 | 用途 |
-|---|---|
-| `FEELPOST_DATA_DIR` | 覆盖数据目录，默认 `~/Documents/feelpost` |
-| `FEELPOST_SMOKE=1` | 隐藏窗口启动、渲染完成后输出检查结果并退出，用于 CI 冒烟 |
-| `FEELPOST_LOG_DIR` | 覆盖日志目录（受限环境或测试用） |
-| `ELECTRON_MIRROR` | 安装时指定 Electron 下载镜像（如 `https://npmmirror.com/mirrors/electron/`） |
-| `electron_config_cache` | 安装时把 Electron 二进制缓存放到可写目录（受限环境用） |
+技术栈：
+
+- Electron 33
+- React 18 + Vite 5
+- TypeScript 5
+- electron-vite
+- web-tree-sitter（Java WASM grammar）
+- undici
+- zod
+- electron-log
+
+扫描在独立 `worker_threads` 中运行，主进程只负责调度、进度转发和结果入库。
+
+## 开发
+
+```bash
+npm install
+
+npm run dev        # 开发模式
+npm run typecheck  # 类型检查
+npm test           # 单元测试
+npm run build      # 构建 main / preload / renderer
+```
+
+测试覆盖：
+
+- 参数合并与接口指纹
+- 项目与本地存储
+- Java 扫描与候选 diff
+- 环境、设置、用例、响应示例
+- AI 缓存与取消
+
+当前测试数量：**73 个**。
+
+## 打包
+
+```bash
+npm run pack     # 当前系统安装包：macOS DMG / Windows NSIS
+npm run dist     # 当前系统完整产物
+npm run dist:mac # macOS DMG + ZIP（arm64 / x64）
+npm run dist:win # Windows NSIS + Portable（x64）
+```
+
+GitHub Actions 在以下情况会自动构建并发布 GitHub Release：
+
+- 手动运行 `build` workflow；
+- 推送 `v*` 标签。
+
+Release 会包含：
+
+```text
+FeelPost-<version>-arm64.dmg
+FeelPost-<version>-x64.dmg
+FeelPost-<version>-arm64.zip
+FeelPost-<version>-x64.zip
+FeelPost-<version>-x64-Setup.exe
+FeelPost-<version>-x64-Portable.exe
+```
 
 ## 目录结构
 
 ```text
 src/
-├── main/                 Electron 主进程（应用服务 + 适配器）
-│   ├── index.ts          启动、窗口、生命周期
-│   ├── ipc/register.ts   通道注册、zod 校验、结果包络
-│   ├── services/         Project / Settings 服务
-│   └── storage/          JSON 原子读写、路径
-├── preload/index.ts      contextBridge 暴露类型化 API
-├── renderer/             React 界面（项目列表 / 新建项目 / 工作区壳）
-├── core/rules/           纯领域规则：参数合并、指纹、状态机
-└── shared/contract.ts    IPC 契约类型（Result / 错误码 / DTO）
-tests/unit/               Vitest 单元测试
-resources/                打包资源
-docs/design/              01–07 设计文档
-prototype/                可交互页面原型
+├── main/                 Electron 主进程
+│   ├── index.ts          窗口、生命周期
+│   ├── ipc/              IPC 注册与参数校验
+│   ├── services/         业务服务
+│   ├── scanner/          Java 扫描器与 Worker
+│   └── storage/          JSON 存储与路径
+├── preload/              contextBridge API
+├── renderer/             React 界面
+├── core/rules/           纯领域规则
+└── shared/contract.ts    IPC 契约类型
+docs/                     设计文档与实现快照
+resources/                图标、grammar 等打包资源
+tests/                    Vitest 单元测试
 ```
 
-## 已完成
+## 文档
 
-- 项目列表、新建项目（源码目录可稍后选择）、项目工作区；未设置源码目录时点击扫描会先弹出目录选择并回写项目；项目设置支持名称/描述/源码目录/排除规则修改与删除；项目卡片支持删除（二次确认，级联清空项目目录下全部数据）；
-- 项目数据按数据模型 03 落盘：`projects/<id>/project.json`、`environments.json`、`globals.json`、`interfaces/`、`cases/`、`scan/`；AI 接入文档功能已下线，不再写入或读取 `ai-docs/`；
-- 默认环境生成、目录校验（构建文件 + Controller 计数）、重名目录冲突检测、删除级联；
-- **源码扫描**：扫描在独立 `worker_threads` 中执行，tree-sitter Java grammar（WASM）解析 Controller / 路径 / 参数 / DTO / Javadoc / 校验注解；支持整个工程、指定目录与 Maven 模块多选；进度事件、取消、候选 diff、授权入库；
-- **接口语义**：优先读取 `@ApiOperation.value` / `@Operation(summary)` 作为接口名称，`@SysLog.value`、Javadoc 兜底；字段说明读取 `@ApiModelProperty.value` / `@Schema.description`；`JSONObject`、`Map` 等动态请求体按空 JSON 处理，不误报解析失败；
-- **接口资产**：按原型实现工作台（左轨、搜索/方法筛选、模块树）、接口契约、解析完整度、变更说明、确认变更、恢复归档；左侧树优先显示扫描出的接口名称，无名称时显示路径最后一段；列表区域独立滚动，方法以彩色标签展示；
-- **人工校正**：字段级覆盖（类型/必填/说明）+ 接口补充说明，写入人工层，扫描不覆盖；
-- 扫描快照与最近一次扫描摘要落盘（`scan/snapshot.json`、`scan/last-run.json`）；
-- 请求日志输出到终端 `[FeelPost:http]` 与数据目录 `logs/requests.log`，包含 URL、Header、Body、状态码、耗时与错误原因（敏感 Header 脱敏）；
-- **环境**：独立环境工作区，环境新建/切换/删除/设为默认；前置 URL / 超时 / 证书校验 / 代理 / 免代理名单；环境参数与项目级全局参数编辑；生效参数合并预览；
-- **请求执行**：undici 发送、按环境 TLS/代理/超时、取消、响应状态/耗时/大小/正文/响应头/响应示例、按耗时给出动态速度评价、简化 JSON、响应区直接保存成功/失败响应示例、查看示例、复制 curl；请求区按 Headers / Query / Path / Body / Cookies / 生效参数排列，生效参数按卡片分组展示、空参数自动收起；表格式标签默认两行空数据、空键不参与发送，参数说明可直接编辑；Body 支持 none / raw（JSON、Text）/ form-data（含文件）/ urlencoded / binary，JSON 请求体与响应体带语法高亮、行号与格式化；接口名称与说明支持点击后手动编辑，写入人工层，名称会同步到左侧接口树；顶部「保存」拆分为保存接口信息 + 下拉保存用例，支持 ⌘/Ctrl+S 快捷键；保存会同时写入 Path/Query/Header/Cookie/Body 请求参数，以及当前响应示例（简化模式下保存简化内容），切换接口或重启后自动回填；
-- **用例**：保存当前请求为冻结快照、列表/标签筛选/关键词搜索、序号、详情、改名、复制、删除、按标签批量删除、按标签选择后 AI 导出联调文档（按接口分批生成、超限拆用例、合并为一个 MD，参数与响应示例未变化时复用本地缓存）；接口变更与环境删除会给出提示；
-- **文档**：项目级按接口组织的 Markdown，包含环境与全局参数、生效 Header/Query/Cookie、请求体字段说明与响应示例；支持预览 / 源码切换、范围与手工接口开关、按名称/方法/路径/状态/模块筛选、复制与导出；单个接口 6 块 Markdown 导出；绝对 http(s) 接口地址导出时不再拼接环境前缀；
-- **字段描述**：请求体自定义 JSON 与响应 JSON 都可从当前内容生成字段路径/类型/示例，逐字段填写说明并持久化；
-- **用例导出**：必须选择标签后才能 AI 导出；AI 基于现有请求快照、接口契约和响应示例生成可交付 Markdown，文档包含请求头、入参、响应参数表格；
-- IPC 契约子集：项目 / 设置 / 目录选择 / 扫描 / 接口资产 / 环境 / 请求 / 用例 / 响应示例 / 导出，含扫描事件；
-- 领域规则：三层参数合并（Body 仅补缺）、接口指纹、状态机，单测覆盖；
-- **应用设置**：浅色/深色主题、全局缩放比例（80%–150%，持久化）、数据目录与日志目录打开、调试日志开关、版本与平台信息；关于页展示官网、GitHub、微信与版本更新检查；AI 设置支持国内外主流服务商预设、自动填入 URL/模型、获取模型列表；
-- 深/浅主题切换并持久化。
+- [当前实现现状](docs/实现现状-2026-11-25.md)
+- 设计过程记录见 `docs/design/01–07`；当前实现以上面的现状文档为准。
 
-![用例工作区](docs/design/assets/cases-workspace.png)
+## 已知限制
 
-## 尚未实现
+- 当前安装包未签名、未公证；
+- 只支持本地单用户使用，不提供团队协作或云同步；
+- 扫描基于 tree-sitter 静态分析，动态生成的接口或复杂泛型可能需要人工校正；
+- AI 功能需要用户自行配置兼容 OpenAI 风格的服务商。
 
-- 更多文档模板；
-- 代码签名 / 公证、GUI 自动化测试。
+## 贡献
 
-## 验证状态
+欢迎提交 Issue 和 Pull Request。
 
-- `npm run typecheck` 通过
-- `npm test`：71 个单测通过（规则 / 项目 / 扫描 / 资产 / 环境 / 设置 / 请求体 / 用例 / 响应示例 / JSON 简化 / 速度分级）
-- `npm run build` 通过（main / preload / renderer）
-- 打包配置与 CI 已接入：macOS DMG/ZIP、Windows NSIS/Portable；`npm run pack` 按系统生成 DMG 或 exe；未签名
-- 渲染冒烟通过：主进程、preload、React 页面均正常加载（`hasApi: object`、`hasApp: true`）
-- **端到端扫描冒烟通过**：创建项目 → 扫描 `tests/fixtures/demo-spring` → 3 个候选 → 入库 → 资产树出现 `demo-spring` 模块
-- **端到端请求冒烟通过**：本地 HTTP 服务收到 `GET /api/users/42?keyword=alice`，界面显示 `200 OK` 与响应体
-
-无图形会话的环境可用 headless 方式验证：
+提交前请至少运行：
 
 ```bash
-unset ELECTRON_RUN_AS_NODE
-FEELPOST_SMOKE=1 \
-FEELPOST_DATA_DIR="$PWD/.tmp-data" \
-FEELPOST_LOG_DIR="$PWD/.tmp-data/logs" \
-./node_modules/.bin/electron --headless --no-sandbox --disable-gpu out/main/index.js
+npm run typecheck
+npm test
+npm run build
 ```
 
-> 当前执行环境没有常驻 WindowServer，直接启动 GUI 会 `SIGTRAP`；在本地桌面终端用 `npm run dev` 即可正常开窗。
-> UI 基础组件先用原生 React/CSS，Radix 与完整设计系统在与 04 页面逐页对接时引入。
+如果是界面改动，建议附上修改前后的截图。
 
-## 文档索引
+## License
 
-- **当前实现状态（权威）**：[`docs/实现现状-2026-11-25.md`](docs/实现现状-2026-11-25.md)
-- **版本与发布规则**：[`VERSIONING.md`](VERSIONING.md)
-- **版本升级说明**：[`CHANGELOG.md`](CHANGELOG.md)
-- 以下 01–07 为设计过程记录；与当前实现冲突处以实现现状为准。
-
-## 设计依据
-
-- `docs/design/01.功能模块梳理.md`
-- `docs/design/02.整体架构设计.md`
-- `docs/design/03.数据模型设计.md`
-- `docs/design/04.页面与交互设计.md`
-- `docs/design/05.IPC契约设计.md`
-- `docs/design/06.AI模块详细设计.md`
-- `docs/design/07.AI实现评审.md`
-
-
-## 打包
-
-- GitHub Actions 手动运行或推送 `v*` 标签时，会在 macOS / Windows 构建完成后自动创建 / 更新 GitHub Release，并上传 dmg、zip、exe。
-
-- macOS：`npm run dist:mac:arm64`（本机 arm64）/ CI `--mac --arm64 --x64`
-- Windows：Windows runner 上运行 `npm run dist:win`
-- 产物：`FeelPost-<version>-<arch>.dmg`、`FeelPost-<version>-<arch>.zip`、`FeelPost-<version>-x64-Setup.exe`、`FeelPost-<version>-x64-Portable.exe`
-- 当前未签名：macOS 正式分发需 Developer ID + notarization，Windows 建议 Authenticode 签名
+本项目当前未声明开源许可证（`package.json` 中为 `UNLICENSED`）。如需开源或商用分发，请先补充明确的 `LICENSE` 文件。
