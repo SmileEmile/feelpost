@@ -337,6 +337,12 @@ export function registerIpc(options: Options): void {
     return { path: filePath, name: basename(filePath) }
   })
 
+  handle('shell:openExternal', async (payload) => {
+    const { url } = z.object({ url: z.string().url() }).parse(payload)
+    if (!/^https?:\/\//i.test(url)) throw new AppException('VALIDATION', '仅支持打开 http/https 链接。')
+    await shell.openExternal(url)
+  })
+
   handle('shell:openPath', async (payload: { path: string }) => {
     if (!payload?.path) throw new AppException('VALIDATION', '缺少目录路径。')
     const dataDir = resolve(options.dataDir)

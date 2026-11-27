@@ -262,6 +262,14 @@ export default function SettingsView({ info, prefs, onPrefs, notify, focus, onFo
     if (!saved) setAIConfig(previous)
   }
 
+  async function openLink(url: string): Promise<void> {
+    try {
+      await unwrap(window.feelpost.shell.openExternal(url))
+    } catch (err) {
+      notify((err as Error).message)
+    }
+  }
+
   async function checkUpdates(silent = false): Promise<void> {
     setUpdateChecking(true)
     setUpdateError('')
@@ -577,14 +585,13 @@ export default function SettingsView({ info, prefs, onPrefs, notify, focus, onFo
           <span className="spacer" />
           <span className="chip muted">v{info?.version ?? '—'}</span>
         </div>
-        <p className="small-note">升级不会清空数据目录。</p>
 
         <div className="about-social" aria-label="项目链接">
-          <button className="about-social-btn" onClick={() => void window.feelpost.shell.openExternal('https://smileemile.github.io/feelpost/')} title="打开官网" aria-label="打开官网">
+          <button className="about-social-btn" onClick={() => void openLink('https://smileemile.github.io/feelpost/')} title="打开官网" aria-label="打开官网">
             <img src={brandIcon} alt="" />
             <span>官网</span>
           </button>
-          <button className="about-social-btn github" onClick={() => void window.feelpost.shell.openExternal('https://github.com/smileemile/feelpost/')} title="打开 GitHub 仓库" aria-label="打开 GitHub 仓库">
+          <button className="about-social-btn github" onClick={() => void openLink('https://github.com/smileemile/feelpost/')} title="打开 GitHub 仓库" aria-label="打开 GitHub 仓库">
             <GithubIcon />
             <span>GitHub</span>
           </button>
@@ -603,7 +610,7 @@ export default function SettingsView({ info, prefs, onPrefs, notify, focus, onFo
           </div>
           <span className="spacer" />
           {updateInfo?.hasUpdate ? (
-            <button className="btn primary small" onClick={() => void window.feelpost.shell.openExternal(updateInfo.url)}>下载 v{updateInfo.latestVersion}</button>
+            <button className="btn primary small" onClick={() => void openLink(updateInfo.url)}>下载 v{updateInfo.latestVersion}</button>
           ) : (
             <button className="btn small" disabled={updateChecking} onClick={() => void checkUpdates()}>{updateChecking ? '检查中…' : '检查更新'}</button>
           )}
