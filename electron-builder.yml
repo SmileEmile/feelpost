@@ -34,6 +34,6 @@ win:
 nsis:
   oneClick: false
   allowToChangeInstallationDirectory: true
-  artifactName: ${productName}-${version}-x64-Setup.${ext}
+  artifactName: ${productName}-${version}-${arch}-Setup.${ext}
 portable:
-  artifactName: ${productName}-${version}-x64-Portable.${ext}
+  artifactName: ${productName}-${version}-${arch}-Portable.${ext}
