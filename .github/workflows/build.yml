@@ -22,6 +22,20 @@ jobs:
       - run: npm run build
       - run: npm run release:check
       - run: npx electron-builder --mac --arm64 --x64 --publish never
+      - name: Verify ad-hoc signed macOS apps
+        shell: bash
+        run: |
+          set -euo pipefail
+          found=0
+          while IFS= read -r -d '' app; do
+            found=1
+            echo "Verifying $app"
+            codesign --verify --deep --strict --verbose=2 "$app"
+          done < <(find release -maxdepth 3 -name 'FeelPost.app' -print0)
+          if [[ "$found" -eq 0 ]]; then
+            echo "No FeelPost.app found under release/" >&2
+            exit 1
+          fi
       - uses: actions/upload-artifact@v4
         with:
           name: feelpost-mac

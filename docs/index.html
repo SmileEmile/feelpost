@@ -421,6 +421,16 @@
                 <li>Windows Portable：免安装 <code>.exe</code>。</li>
               </ul>
               <p>当前安装包未做代码签名，首次运行可能被系统提示。正式分发前需要补充签名和公证。</p>
+              <h3>macOS 提示“FeelPost 已损坏，无法打开”</h3>
+              <div class="callout"><strong>这不是安装包损坏。</strong>Chrome 下载后会附加 macOS quarantine 标记；当前 v0.1.0 又未做 Developer ID 签名和公证，Gatekeeper 会把未签名应用显示为“已损坏”。从官方 GitHub Releases 下载后，按下面步骤处理即可。</div>
+              <ol>
+                <li>先把 <code>FeelPost.app</code> 拖到「应用程序」目录，不要直接在 DMG 挂载目录里运行。</li>
+                <li>打开「终端」，执行下面的命令，移除该应用的隔离标记：</li>
+              </ol>
+              <pre class="code-scroll"><code>xattr -dr com.apple.quarantine /Applications/FeelPost.app
+open /Applications/FeelPost.app</code></pre>
+              <p>如果应用安装在当前用户目录，把路径换成 <code>~/Applications/FeelPost.app</code>。仍被拦截时，打开「系统设置 → 隐私与安全性 → 安全性」，在底部选择「仍要打开」。</p>
+              <p>另外请确认下载了正确的架构：Apple Silicon 使用 <code>arm64</code> 的 DMG，Intel Mac 使用 <code>x64</code> 的 DMG。Apple Silicon 上误装 x64 版本可能触发额外的 Rosetta 或签名提示。</p>
               <h3>从源码运行</h3>
               <pre class="code-scroll"><code>git clone https://github.com/smileemile/feelpost.git
 cd feelpost
@@ -441,8 +451,8 @@ npm run dist:win         # Windows .exe</code></pre>
               <p>可以。接口资产支持手工接口，适合网关、外部服务或尚未写入 Spring Boot 的接口。</p>
               <h3>数据保存在哪里？</h3>
               <p>默认在 <code>~/Documents/feelpost</code>，可以通过 <code>FEELPOST_DATA_DIR</code> 修改。所有数据都是本地 JSON 文件。</p>
-              <h3>安装包为什么提示“未签名”？</h3>
-              <p>当前 v0.1.0 是内部 Alpha 版本，尚未完成 macOS 公证和 Windows 代码签名。首次运行需要按系统提示确认。</p>
+              <h3>安装包为什么提示“未签名”或“已损坏”？</h3>
+              <p>当前 v0.1.0 是内部 Alpha 版本，尚未完成 macOS Developer ID 签名和公证。提示“已损坏”通常不是文件损坏，而是 Gatekeeper 对未签名应用的处理；可在「下载安装」中按 macOS 的 <code>xattr</code> 步骤处理。正式分发前会补充签名和公证。</p>
               <h3>如何反馈问题？</h3>
               <p>到 <a href="https://github.com/smileemile/feelpost/issues" target="_blank" rel="noreferrer">GitHub Issues</a> 提交问题，或直接发起 PR。文档也会随版本持续更新。</p>
             </section>

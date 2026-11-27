@@ -4,6 +4,10 @@ copyright: Copyright © 2026 Emile
 directories:
   buildResources: resources
   output: release
+
+# Alpha macOS builds are ad-hoc signed after packing. A real Developer ID
+# signature, when configured, is left untouched.
+afterPack: scripts/adhoc-sign.mjs
 files:
   - out/**
   - package.json
