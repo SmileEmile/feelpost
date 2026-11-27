@@ -138,6 +138,8 @@ FEELPOST_LOG_DIR="$PWD/.tmp-data/logs" \
 
 ## 打包
 
+- GitHub Actions 手动运行或推送 `v*` 标签时，会在 macOS / Windows 构建完成后自动创建 / 更新 GitHub Release，并上传 dmg、zip、exe。
+
 - macOS：`npm run dist:mac:arm64`（本机 arm64）/ CI `--mac --arm64 --x64`
 - Windows：Windows runner 上运行 `npm run dist:win`
 - 产物：`FeelPost-<version>-<arch>.dmg`、`FeelPost-<version>-<arch>.zip`、`FeelPost-<version>-x64-Setup.exe`、`FeelPost-<version>-x64-Portable.exe`
