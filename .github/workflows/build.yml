@@ -20,6 +20,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      - run: npm run release:check
       - run: npx electron-builder --mac --arm64 --x64 --publish never
       - uses: actions/upload-artifact@v4
         with:
@@ -39,6 +40,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      - run: npm run release:check
       - run: npx electron-builder --win --x64 --publish never
       - uses: actions/upload-artifact@v4
         with:
@@ -53,6 +55,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
 
       - id: meta
         name: Resolve release tag
@@ -67,6 +72,10 @@ jobs:
           echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
           echo "name=FeelPost ${TAG}" >> "$GITHUB_OUTPUT"
 
+      - id: notes
+        name: Generate release notes from CHANGELOG
+        run: node scripts/release-notes.mjs "${{ steps.meta.outputs.tag }}"
+
       - uses: actions/download-artifact@v4
         with:
           path: release-assets
@@ -79,7 +88,7 @@ jobs:
             release-assets/feelpost-mac/*.dmg
             release-assets/feelpost-mac/*.zip
             release-assets/feelpost-windows/*.exe
-          generate_release_notes: true
+          body_path: release-notes.md
           draft: false
           prerelease: false
           overwrite_files: true

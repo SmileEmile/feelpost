@@ -37,6 +37,7 @@ npm run dev        # 启动 Electron 开发模式
 | `npm run build` | 构建 main / preload / renderer 到 `out/` |
 | `npm run typecheck` | 主进程与渲染进程 TypeScript 检查 |
 | `npm test` | Vitest 单元测试（领域规则 + 项目存储） |
+| `npm run release:check` | 校验版本号并生成 `release-notes.md` |
 | `npm run pack` / `npm run dist` | electron-builder 打包（未签名） |
 
 ## 环境变量
@@ -123,6 +124,8 @@ FEELPOST_LOG_DIR="$PWD/.tmp-data/logs" \
 ## 文档索引
 
 - **当前实现状态（权威）**：[`docs/实现现状-2026-11-25.md`](docs/实现现状-2026-11-25.md)
+- **版本与发布规则**：[`VERSIONING.md`](VERSIONING.md)
+- **版本升级说明**：[`CHANGELOG.md`](CHANGELOG.md)
 - 以下 01–07 为设计过程记录；与当前实现冲突处以实现现状为准。
 
 ## 设计依据
