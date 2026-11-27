@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#edf3fb"/>
+    </linearGradient>
+    <linearGradient id="blue" gradientUnits="userSpaceOnUse" x1="320" y1="300" x2="710" y2="724">
+      <stop offset="0" stop-color="#4f8cff"/>
+      <stop offset="1" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="green" gradientUnits="userSpaceOnUse" x1="612" y1="480" x2="710" y2="582">
+      <stop offset="0" stop-color="#5fd6a8"/>
+      <stop offset="1" stop-color="#20b985"/>
+    </linearGradient>
+  </defs>
+  <rect x="52" y="52" width="920" height="920" rx="220" fill="url(#bg)"/>
+  <rect x="82" y="82" width="860" height="860" rx="195" fill="none" stroke="#d8e4f4" stroke-width="2"/>
+  <path d="M370 300H660V402H370Z" fill="url(#blue)"/>
+  <path d="M370 300L470 300L420 724L320 724Z" fill="url(#blue)"/>
+  <path d="M348 480H612V582H348Z" fill="url(#blue)"/>
+  <path d="M612 480L710 531L612 582Z" fill="url(#green)"/>
+</svg>

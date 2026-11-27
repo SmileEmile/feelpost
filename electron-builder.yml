@@ -14,14 +14,14 @@ asarUnpack:
   - out/main/scan-worker.js
   - out/main/chunks/**
 mac:
-  icon: resources/icon.png
+  icon: resources/icon.icns
   artifactName: ${productName}-${version}-${arch}.${ext}
   category: public.app-category.developer-tools
   target:
     - dmg
     - zip
 win:
-  icon: resources/icon.png
+  icon: resources/icon.ico
   target:
     - nsis
     - portable
