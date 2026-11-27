@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="FeelPost 产品文档：v0.1.0 更新日志、完整功能说明、使用流程、本地数据与下载安装。" />
+  <link rel="canonical" href="https://smileemile.github.io/feelpost/docs/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://smileemile.github.io/feelpost/docs/" />
+  <meta property="og:site_name" content="FeelPost" />
+  <meta property="og:title" content="FeelPost 文档 — 更新日志与功能说明" />
+  <meta property="og:description" content="从源码扫描到前端交付：FeelPost 的完整功能说明与 v0.1.0 更新日志。" />
+  <meta property="og:image" content="https://smileemile.github.io/feelpost/resources/icon.png" />
+  <title>FeelPost 文档 — 更新日志与功能说明</title>
+  <link rel="icon" type="image/svg+xml" href="../resources/icon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { colors: { brand: { 50:'#eff6ff',100:'#dbeafe',200:'#bfdbfe',300:'#93c5fd',400:'#60a5fa',500:'#3b82f6',600:'#2563eb',700:'#1d4ed8',800:'#1e40af',900:'#1e3a8a' } }, boxShadow: { soft:'0 12px 40px -18px rgba(15,23,42,.18)' } } }
+    }
+  </script>
+  <style>
+    :root { color-scheme: light; }
+    html.dark { color-scheme: dark; }
+    body { font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif; }
+    html { scroll-behavior: smooth; }
+    section[id], h2[id], h3[id] { scroll-margin-top: 92px; }
+    ::selection { background: rgba(37,99,235,.18); }
+    .docs-content { color: #475569; font-size: 13px; line-height: 1.9; }
+    .dark .docs-content { color: #94a3b8; }
+    .docs-content section[id] { padding-top: 2rem; }
+    .docs-content section[id] h2 { scroll-margin-top: 92px; margin-top: 0; font-size: 23px; line-height: 1.35; font-weight: 700; letter-spacing: -.025em; color: #0f172a; }
+    .docs-content h3 { scroll-margin-top: 92px; margin-top: 2rem; font-size: 15px; line-height: 1.5; font-weight: 650; color: #1e293b; }
+    .dark .docs-content h2 { color: #f8fafc; }
+    .dark .docs-content h3 { color: #e2e8f0; }
+    .docs-content p { margin-top: .7rem; }
+    .docs-content ul, .docs-content ol { margin-top: .7rem; padding-left: 1.25rem; }
+    .docs-content ul { list-style: disc; }
+    .docs-content ol { list-style: decimal; }
+    .docs-content li { margin-top: .35rem; padding-left: .15rem; }
+    .docs-content li::marker { color: #94a3b8; }
+    .docs-content strong { color: #334155; font-weight: 600; }
+    .dark .docs-content strong { color: #e2e8f0; }
+    .docs-content a { color: #2563eb; text-decoration: underline; text-underline-offset: 3px; }
+    .dark .docs-content a { color: #60a5fa; }
+    .docs-content code { border: 1px solid rgba(148,163,184,.22); border-radius: .3rem; background: #f8fafc; padding: .1rem .3rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9em; color: #334155; }
+    .dark .docs-content code { border-color: rgba(255,255,255,.1); background: rgba(255,255,255,.05); color: #cbd5e1; }
+    .docs-content pre { margin-top: 1rem; overflow-x: auto; border: 1px solid rgba(255,255,255,.08); border-radius: .65rem; background: #0d1117; padding: 1rem 1.1rem; color: #cbd5e1; font-size: 11px; line-height: 1.8; }
+    .docs-content pre code { border: 0; background: transparent; padding: 0; color: inherit; font-size: inherit; }
+    .docs-content .callout { margin-top: 1rem; border: 1px solid #dbeafe; border-radius: .65rem; background: #eff6ff; padding: .85rem 1rem; color: #334155; }
+    .dark .docs-content .callout { border-color: rgba(96,165,250,.15); background: rgba(59,130,246,.08); color: #cbd5e1; }
+    .docs-content .callout strong { color: #1d4ed8; }
+    .dark .docs-content .callout strong { color: #93c5fd; }
+    .docs-content table { margin-top: 1rem; width: 100%; border-collapse: collapse; font-size: 12px; }
+    .docs-content th, .docs-content td { border-bottom: 1px solid #e2e8f0; padding: .65rem .6rem; text-align: left; vertical-align: top; }
+    .docs-content th { background: #f8fafc; color: #475569; font-weight: 600; }
+    .dark .docs-content th, .dark .docs-content td { border-color: rgba(255,255,255,.07); }
+    .dark .docs-content th { background: rgba(255,255,255,.04); color: #cbd5e1; }
+    .docs-shot { margin-top: 1.25rem; overflow: hidden; border: 1px solid #e2e8f0; border-radius: .8rem; background: #f8fafc; box-shadow: 0 14px 35px -25px rgba(15,23,42,.3); }
+    .dark .docs-shot { border-color: rgba(255,255,255,.1); background: rgba(255,255,255,.03); }
+    .docs-shot img { display: block; width: 100%; height: auto; }
+    .docs-shot figcaption { border-top: 1px solid #e2e8f0; padding: .55rem .85rem; color: #94a3b8; font-size: 10px; }
+    .dark .docs-shot figcaption { border-color: rgba(255,255,255,.07); }
+    .docs-placeholder { margin-top: 1rem; display: grid; min-height: 140px; place-items: center; border: 1px dashed #cbd5e1; border-radius: .75rem; background: #f8fafc; color: #94a3b8; font-size: 11px; }
+    .dark .docs-placeholder { border-color: rgba(255,255,255,.15); background: rgba(255,255,255,.02); }
+    .toc-link { display: block; border-left: 2px solid transparent; padding: .28rem 0 .28rem .75rem; color: #64748b; font-size: 11px; line-height: 1.5; transition: color .15s, border-color .15s; }
+    .toc-link:hover { color: #0f172a; }
+    .dark .toc-link { color: #94a3b8; }
+    .dark .toc-link:hover { color: #f8fafc; }
+    .toc-link.active { border-color: #2563eb; color: #2563eb; font-weight: 600; }
+    .dark .toc-link.active { border-color: #60a5fa; color: #93c5fd; }
+    .toc-title { margin-top: 1.2rem; margin-bottom: .35rem; padding-left: .75rem; color: #94a3b8; font-size: 9px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+    .toc-title:first-child { margin-top: 0; }
+    #site-header { transition: background-color .25s ease, border-color .25s ease; }
+    .code-scroll::-webkit-scrollbar { height: 7px; width: 7px; }
+    .code-scroll::-webkit-scrollbar-thumb { background: rgba(148,163,184,.35); border-radius: 999px; }
+    #toast { position: fixed; left: 50%; bottom: 26px; z-index: 100; transform: translate(-50%, 12px); opacity: 0; pointer-events: none; transition: opacity .2s ease, transform .2s ease; }
+    #toast.show { opacity: 1; transform: translate(-50%, 0); }
+    @media (max-width: 640px) { .docs-content section[id] { padding-top: 1.6rem; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
+  </style>
+  <script>
+    (function(){try{var s=localStorage.getItem('feelpost-theme');var d=s==='dark'||(s!=='light'&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d)}catch(e){}})()
+  </script>
+</head>
+<body class="bg-white text-slate-900 antialiased dark:bg-[#0b0f14] dark:text-slate-100">
+  <div id="toast" class="rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-700 shadow-lg dark:border-white/10 dark:bg-[#111820] dark:text-slate-200" role="status" aria-live="polite"></div>
+
+  <header id="site-header" class="fixed inset-x-0 top-0 z-50 border-b border-slate-200/80 bg-white/85 backdrop-blur-xl dark:border-white/[0.08] dark:bg-[#0b0f14]/85">
+    <div class="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-6 lg:px-8">
+      <a href="../index.html" class="flex shrink-0 items-center gap-2.5" aria-label="FeelPost 首页">
+        <img src="../resources/icon.svg" alt="" class="h-9 w-9 shrink-0 drop-shadow-sm" />
+        <span class="text-[15px] font-semibold tracking-tight">FeelPost</span>
+        <span class="hidden rounded-full border border-slate-200 px-2 py-0.5 text-[10px] font-medium text-slate-500 sm:inline dark:border-white/10 dark:text-slate-400">Docs</span>
+      </a>
+      <nav class="hidden items-center gap-7 text-[13px] font-medium text-slate-600 md:flex dark:text-slate-300" aria-label="主导航">
+        <a href="../index.html" class="transition-colors hover:text-slate-950 dark:hover:text-white">首页</a>
+        <a href="index.html" class="font-semibold text-brand-600 dark:text-brand-400" aria-current="page">文档</a>
+        <a href="https://github.com/smileemile/feelpost" target="_blank" rel="noreferrer" class="transition-colors hover:text-slate-950 dark:hover:text-white">GitHub</a>
+        <div class="relative" data-download-root>
+            <button type="button" class="flex items-center gap-1 rounded-md py-1 text-[13px] font-medium text-slate-600 transition-colors hover:text-slate-950 dark:text-slate-300 dark:hover:text-white" data-download-toggle aria-haspopup="menu" aria-expanded="false">
+              <span>下载</span><svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="absolute right-0 top-9 z-50 hidden w-[300px] rounded-xl border border-slate-200 bg-white p-1.5 shadow-soft dark:border-white/10 dark:bg-[#111820]" data-download-menu role="menu">
+              <div class="flex items-center justify-between px-2.5 pb-1.5 pt-1"><p class="text-[9px] font-semibold uppercase tracking-[0.16em] text-slate-400">选择平台</p><span class="font-mono text-[9px] text-slate-400" data-release-version>v0.1.0</span></div>
+              <a href="https://github.com/SmileEmile/FeelPost/releases/download/v0.1.0/FeelPost-0.1.0-arm64.dmg" target="_blank" rel="noreferrer" class="flex items-center gap-2.5 rounded-lg px-2.5 py-2 transition-colors hover:bg-slate-50 dark:hover:bg-white/5" data-download="mac-arm64">
+                <span class="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-slate-100 text-slate-600 dark:bg-white/5 dark:text-slate-300"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.8c0-2.1 1.7-3.1 1.8-3.2-1-1.4-2.5-1.6-3-1.6-1.3-.1-2.5.7-3.1.7-.7 0-1.7-.7-2.8-.7-1.4 0-2.7.8-3.5 2.1-1.5 2.6-.4 6.5 1.1 8.6.7 1 1.6 2.2 2.7 2.1 1.1 0 1.5-.7 2.9-.7s1.7.7 2.9.7c1.2 0 2-1 2.7-2.1.9-1.2 1.2-2.4 1.2-2.5-.1 0-2.4-.9-2.4-3.4zM14.2 6.3c.6-.8 1.1-1.8 1-2.9-.9 0-2 .6-2.6 1.4-.6.7-1.1 1.8-1 2.8 1 .1 2-.5 2.6-1.3z"/></svg></span>
+                <span class="min-w-0 flex-1"><span class="block text-[11.5px] font-semibold">macOS <span class="font-normal text-slate-400">.dmg</span></span><span class="block text-[9.5px] text-slate-400">Apple Silicon</span></span>
+                <svg class="h-3.5 w-3.5 shrink-0 text-slate-300 dark:text-slate-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l4-4m-4 4l-4-4M5 21h14"/></svg>
+              </a>
+              <a href="https://github.com/SmileEmile/FeelPost/releases/download/v0.1.0/FeelPost-0.1.0-x64.dmg" target="_blank" rel="noreferrer" class="flex items-center gap-2.5 rounded-lg px-2.5 py-2 transition-colors hover:bg-slate-50 dark:hover:bg-white/5" data-download="mac-x64">
+                <span class="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-slate-100 text-slate-600 dark:bg-white/5 dark:text-slate-300"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.8c0-2.1 1.7-3.1 1.8-3.2-1-1.4-2.5-1.6-3-1.6-1.3-.1-2.5.7-3.1.7-.7 0-1.7-.7-2.8-.7-1.4 0-2.7.8-3.5 2.1-1.5 2.6-.4 6.5 1.1 8.6.7 1 1.6 2.2 2.7 2.1 1.1 0 1.5-.7 2.9-.7s1.7.7 2.9.7c1.2 0 2-1 2.7-2.1.9-1.2 1.2-2.4 1.2-2.5-.1 0-2.4-.9-2.4-3.4zM14.2 6.3c.6-.8 1.1-1.8 1-2.9-.9 0-2 .6-2.6 1.4-.6.7-1.1 1.8-1 2.8 1 .1 2-.5 2.6-1.3z"/></svg></span>
+                <span class="min-w-0 flex-1"><span class="block text-[11.5px] font-semibold">macOS <span class="font-normal text-slate-400">.dmg</span></span><span class="block text-[9.5px] text-slate-400">Intel</span></span>
+                <svg class="h-3.5 w-3.5 shrink-0 text-slate-300 dark:text-slate-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l4-4m-4 4l-4-4M5 21h14"/></svg>
+              </a>
+              <a href="https://github.com/SmileEmile/FeelPost/releases/download/v0.1.0/FeelPost-0.1.0-x64-Setup.exe" target="_blank" rel="noreferrer" class="flex items-center gap-2.5 rounded-lg px-2.5 py-2 transition-colors hover:bg-slate-50 dark:hover:bg-white/5" data-download="win-x64">
+                <span class="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-slate-100 text-slate-600 dark:bg-white/5 dark:text-slate-300"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.5l7.5-1.3v7H3zM12.2 4l8.8-1.5v8.7h-8.8zM3 12.2h7.5v7L3 17.9zM12.2 12.2H21v8.3L12.2 19z"/></svg></span>
+                <span class="min-w-0 flex-1"><span class="block text-[11.5px] font-semibold">Windows <span class="font-normal text-slate-400">.exe</span></span><span class="block text-[9.5px] text-slate-400">Installer · x64</span></span>
+                <svg class="h-3.5 w-3.5 shrink-0 text-slate-300 dark:text-slate-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l4-4m-4 4l-4-4M5 21h14"/></svg>
+              </a>
+              <a href="https://github.com/SmileEmile/FeelPost/releases/download/v0.1.0/FeelPost-0.1.0-x64-Portable.exe" target="_blank" rel="noreferrer" class="flex items-center gap-2.5 rounded-lg px-2.5 py-2 transition-colors hover:bg-slate-50 dark:hover:bg-white/5" data-download="win-portable">
+                <span class="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-slate-100 text-slate-600 dark:bg-white/5 dark:text-slate-300"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.5l7.5-1.3v7H3zM12.2 4l8.8-1.5v8.7h-8.8zM3 12.2h7.5v7L3 17.9zM12.2 12.2H21v8.3L12.2 19z"/></svg></span>
+                <span class="min-w-0 flex-1"><span class="block text-[11.5px] font-semibold">Windows <span class="font-normal text-slate-400">.exe</span></span><span class="block text-[9.5px] text-slate-400">Portable · x64</span></span>
+                <svg class="h-3.5 w-3.5 shrink-0 text-slate-300 dark:text-slate-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l4-4m-4 4l-4-4M5 21h14"/></svg>
+              </a>
+              <div class="mt-1 border-t border-slate-100 pt-1 dark:border-white/[0.06]">
+                <a href="https://github.com/SmileEmile/FeelPost/releases" target="_blank" rel="noreferrer" class="flex items-center justify-between rounded-lg px-2.5 py-2 text-[10.5px] text-slate-500 transition-colors hover:bg-slate-50 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-white" data-download="all"><span>所有版本</span><svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+              </div>
+            </div>
+          </div>
+      </nav>
+      <div class="flex items-center gap-1.5">
+        <a href="https://github.com/smileemile/feelpost/releases" target="_blank" rel="noreferrer" class="hidden h-8 items-center gap-1.5 rounded-md border border-slate-200 px-2.5 text-[10.5px] font-medium text-slate-500 transition-colors hover:border-slate-300 hover:text-slate-900 sm:flex dark:border-white/10 dark:text-slate-400 dark:hover:border-white/20 dark:hover:text-white"><span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span><span data-release-version>v0.1.0</span></a>
+        <button id="theme-toggle" type="button" class="flex h-8 w-8 items-center justify-center rounded-md text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-white" aria-label="切换主题">
+          <svg class="block h-[15px] w-[15px] dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          <svg class="hidden h-[15px] w-[15px] dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>
+        </button>
+        <button id="mobile-menu-button" type="button" class="flex h-8 w-8 items-center justify-center rounded-md text-slate-600 transition-colors hover:bg-slate-100 md:hidden dark:text-slate-300 dark:hover:bg-white/5" aria-label="打开菜单" aria-expanded="false">
+          <svg class="menu-icon h-[17px] w-[17px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          <svg class="close-icon hidden h-[17px] w-[17px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden border-t border-slate-200/70 bg-white/95 px-6 py-4 backdrop-blur dark:border-white/10 dark:bg-[#0b0f14]/95 md:hidden">
+      <nav class="flex flex-col gap-1 text-[13px] font-medium text-slate-700 dark:text-slate-200" aria-label="移动端导航">
+        <a href="../index.html" class="rounded-md px-2 py-2 hover:bg-slate-50 dark:hover:bg-white/5">首页</a>
+        <a href="index.html" class="rounded-md px-2 py-2 text-brand-600 hover:bg-slate-50 dark:text-brand-400 dark:hover:bg-white/5">文档</a>
+        <a href="https://github.com/smileemile/feelpost" target="_blank" rel="noreferrer" class="rounded-md px-2 py-2 hover:bg-slate-50 dark:hover:bg-white/5">GitHub</a>
+        <div class="mt-1 rounded-md px-2 py-2">
+          <div class="mb-1.5 flex items-center justify-between"><p class="text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-400">下载</p><span class="font-mono text-[9px] text-slate-400" data-release-version>v0.1.0</span></div>
+          <div class="grid grid-cols-2 gap-1.5">
+            <a href="https://github.com/SmileEmile/FeelPost/releases/download/v0.1.0/FeelPost-0.1.0-arm64.dmg" target="_blank" rel="noreferrer" class="rounded-md border border-slate-200 px-2.5 py-2 text-[10.5px] text-slate-600 hover:bg-slate-50 dark:border-white/10 dark:text-slate-300 dark:hover:bg-white/5" data-download="mac-arm64">macOS <span class="text-slate-400">Apple Silicon</span></a>
+            <a href="https://github.com/SmileEmile/FeelPost/releases/download/v0.1.0/FeelPost-0.1.0-x64.dmg" target="_blank" rel="noreferrer" class="rounded-md border border-slate-200 px-2.5 py-2 text-[10.5px] text-slate-600 hover:bg-slate-50 dark:border-white/10 dark:text-slate-300 dark:hover:bg-white/5" data-download="mac-x64">macOS <span class="text-slate-400">Intel</span></a>
+            <a href="https://github.com/SmileEmile/FeelPost/releases/download/v0.1.0/FeelPost-0.1.0-x64-Setup.exe" target="_blank" rel="noreferrer" class="rounded-md border border-slate-200 px-2.5 py-2 text-[10.5px] text-slate-600 hover:bg-slate-50 dark:border-white/10 dark:text-slate-300 dark:hover:bg-white/5" data-download="win-x64">Windows <span class="text-slate-400">Installer</span></a>
+            <a href="https://github.com/SmileEmile/FeelPost/releases/download/v0.1.0/FeelPost-0.1.0-x64-Portable.exe" target="_blank" rel="noreferrer" class="rounded-md border border-slate-200 px-2.5 py-2 text-[10.5px] text-slate-600 hover:bg-slate-50 dark:border-white/10 dark:text-slate-300 dark:hover:bg-white/5" data-download="win-portable">Windows <span class="text-slate-400">Portable</span></a>
+          </div>
+          <a href="https://github.com/SmileEmile/FeelPost/releases" target="_blank" rel="noreferrer" class="mt-1.5 inline-flex text-[10px] text-slate-400 hover:text-brand-600 dark:hover:text-brand-400" data-download="all">所有版本</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="pt-20">
+    <div class="mx-auto max-w-7xl px-6 py-9 lg:px-8 lg:py-12">
+      <div class="grid gap-10 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-12">
+        <aside class="hidden lg:block">
+          <div class="sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto pb-8 pr-2">
+            <p class="mb-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-400">目录</p>
+            <div class="toc-title">开始</div>
+            <a class="toc-link active" href="#changelog">更新日志</a>
+            <a class="toc-link" href="#overview">产品概览</a>
+            <a class="toc-link" href="#features">核心功能</a>
+            <a class="toc-link" href="#workflow">使用流程</a>
+            <div class="toc-title">功能详解</div>
+            <a class="toc-link" href="#scan">源码扫描</a>
+            <a class="toc-link" href="#catalog">接口资产</a>
+            <a class="toc-link" href="#environment">环境与调试</a>
+            <a class="toc-link" href="#cases">用例管理</a>
+            <a class="toc-link" href="#documents">文档导出</a>
+            <a class="toc-link" href="#ai">AI 协作</a>
+            <div class="toc-title">其他</div>
+            <a class="toc-link" href="#data">本地数据</a>
+            <a class="toc-link" href="#install">下载安装</a>
+            <a class="toc-link" href="#faq">常见问题</a>
+          </div>
+        </aside>
+
+        <article class="min-w-0">
+          <header class="border-b border-slate-200/80 pb-7 dark:border-white/[0.08]">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="rounded-full border border-brand-100 bg-brand-50 px-2.5 py-1 text-[10px] font-semibold text-brand-700 dark:border-brand-500/20 dark:bg-brand-500/10 dark:text-brand-300">DOCUMENTATION</span>
+              <span class="rounded-full border border-slate-200 px-2.5 py-1 font-mono text-[10px] text-slate-500 dark:border-white/10 dark:text-slate-400">v0.1.0 · Alpha</span>
+            </div>
+            <h1 class="mt-4 text-[32px] font-bold tracking-[-0.035em] sm:text-[40px]">FeelPost 文档</h1>
+            <p class="mt-3 max-w-2xl text-[14px] leading-7 text-slate-500 dark:text-slate-400">从本地 Spring Boot 源码到前端可直接使用的契约。这里记录每个版本的变化，以及 FeelPost 已经具备的完整能力。</p>
+            <p class="mt-3 text-[10.5px] text-slate-400">最后更新：2026-11-27 · 当前版本：v0.1.0</p>
+          </header>
+
+          <details class="mt-6 rounded-xl border border-slate-200 bg-slate-50/60 p-4 lg:hidden dark:border-white/10 dark:bg-white/[0.03]">
+            <summary class="cursor-pointer text-[12px] font-semibold text-slate-700 dark:text-slate-200">本文目录</summary>
+            <div class="mt-3 grid grid-cols-2 gap-x-4">
+              <a class="toc-link" href="#changelog">更新日志</a><a class="toc-link" href="#overview">产品概览</a>
+              <a class="toc-link" href="#features">核心功能</a><a class="toc-link" href="#workflow">使用流程</a>
+              <a class="toc-link" href="#scan">源码扫描</a><a class="toc-link" href="#catalog">接口资产</a>
+              <a class="toc-link" href="#environment">环境与调试</a><a class="toc-link" href="#cases">用例管理</a>
+              <a class="toc-link" href="#documents">文档导出</a><a class="toc-link" href="#ai">AI 协作</a>
+              <a class="toc-link" href="#data">本地数据</a><a class="toc-link" href="#install">下载安装</a>
+              <a class="toc-link" href="#faq">常见问题</a>
+            </div>
+          </details>
+
+          <div class="docs-content mt-9">
+            <!-- ================= 更新日志（首屏第一块） ================= -->
+            <section id="changelog">
+              <div class="flex flex-wrap items-end justify-between gap-3">
+                <div><h2>更新日志</h2><p class="mt-2">所有版本变化按时间倒序排列。</p></div>
+                <a href="https://github.com/smileemile/feelpost/releases" target="_blank" rel="noreferrer" class="text-[11px]">在 GitHub 查看 Releases ↗</a>
+              </div>
+
+              <div class="mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-white/[0.08] dark:bg-white/[0.025]">
+                <div class="flex flex-wrap items-center gap-2 border-b border-slate-200 bg-slate-50/70 px-5 py-4 dark:border-white/[0.07] dark:bg-white/[0.03]">
+                  <span class="rounded-md bg-brand-600 px-2 py-1 font-mono text-[10px] font-semibold text-white">v0.1.0</span>
+                  <span class="text-[12px] font-semibold">首个内部 Alpha 版本</span>
+                  <span class="ml-auto text-[10px] text-slate-400">2026-11-27</span>
+                </div>
+                <div class="space-y-6 p-5">
+                  <p>这是 FeelPost 的第一个可用版本，围绕「本地源码扫描 → 调试 → 用例 → 文档交付」建立了完整闭环。</p>
+                  <div>
+                    <h3 class="!mt-0 text-emerald-600 dark:text-emerald-400">新增</h3>
+                    <ul>
+                      <li>本地 Spring Boot 源码扫描：Controller、路径、方法、参数、DTO、Javadoc、校验注解；</li>
+                      <li>扫描任务使用独立 <code>worker_threads</code>，支持进度、取消、候选 diff 与入库；</li>
+                      <li>接口资产树、模块 / 包 / 手工目录、搜索、方法筛选、人工校正；</li>
+                      <li>环境、全局参数、TLS、代理、超时与生效参数预览；</li>
+                      <li>HTTP 请求调试：Headers / Query / Path / Body / Cookies、响应示例、JSON 简化、请求取消；</li>
+                      <li>用例快照、标签、搜索、详情、复制、删除、按标签批量删除；</li>
+                      <li>Markdown 文档：项目接口文档、单接口导出、筛选、复制、导出、渐进加载；</li>
+                      <li>字段说明：请求体与响应 JSON 字段路径、类型、示例、手工说明；</li>
+                      <li>AI 字段说明：OpenAI-compatible、流式生成、Diff 应用、失败重试；</li>
+                      <li>AI 用例：场景选择、候选预览、标签编辑、导入当前环境；</li>
+                      <li>AI 用例文档：按接口分批、上下文超限拆分、单个 Markdown 合并、缓存复用、失败批次重试；</li>
+                      <li>AI 服务商预设：DeepSeek、通义千问、智谱 GLM、Kimi、MiniMax、Ollama、OpenAI、Anthropic Claude、Google Gemini、OpenRouter；</li>
+                      <li>模型列表获取：通过兼容 <code>/models</code> 接口拉取并选择；</li>
+                      <li>AI 设置页状态校验、API Key 安全存储、连接测试失败重试；</li>
+                      <li>macOS DMG / ZIP、Windows NSIS / Portable 打包配置与 GitHub Actions 构建；</li>
+                      <li>应用内 Message 提示、统一设置侧栏、接口 Tab 右键关闭、目录快捷操作。</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 class="text-amber-600 dark:text-amber-400">调整</h3>
+                    <ul>
+                      <li>产品展示名统一为 FeelPost，技术标识保持 <code>feelpost</code>；</li>
+                      <li>用例导出必须以标签为范围，AI 导出与普通导出并存；</li>
+                      <li>文档页 AI 接入文档入口下线，统一使用「用例 → AI 导出」；</li>
+                      <li>设置页采用与文档 / 环境一致的白色侧栏；</li>
+                      <li>新建 HTTP 直接打开请求面板，不再经过额外表单。</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 class="text-slate-600 dark:text-slate-300">修复</h3>
+                    <ul>
+                      <li>AI 测试连接偶发误报失败：HTTP 2xx 即视为连接成功；</li>
+                      <li>响应示例变化后 AI 缓存正确失效；</li>
+                      <li>请求方式 / 路径保存后接口 Tab 与左侧菜单同步更新；</li>
+                      <li>加载计时固定宽度显示，避免页面晃动；</li>
+                      <li>模型与服务商切换后连接验证状态正确失效；</li>
+                      <li>修复 Windows CI 非法文件名；</li>
+                      <li>修复 GitHub Actions 自动发布缺少 Token 的问题。</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- ================= 产品概览 ================= -->
+            <section id="overview">
+              <h2>产品概览</h2>
+              <p>FeelPost 是一个运行在本机的桌面工具，用来把 Spring Boot 后端接口从源码整理成前端可以直接使用的契约文档。它不依赖云端服务，项目、接口、环境、用例和响应示例都保存在本地。</p>
+              <p>AI 是可选项。不开启 AI，也能完成扫描、调试、用例和普通 Markdown 导出；需要时再接入 OpenAI-compatible 服务商。</p>
+              <div class="callout"><strong>适合谁：</strong>需要维护 Spring Boot 接口资产、经常和前端联调、或者在封网 / 内网环境工作的开发团队。支持源码接口和手工接口。</div>
+              <figure class="docs-shot">
+                <img src="../docs/design/assets/workspace-scan.png" alt="FeelPost 扫描与接口工作台" width="2720" height="1760" loading="lazy" />
+                <figcaption>源码扫描后进入接口工作台，左侧接口树、右侧契约与请求面板。</figcaption>
+              </figure>
+            </section>
+
+            <!-- ================= 核心功能 ================= -->
+            <section id="features">
+              <h2>核心功能</h2>
+              <p>v0.1.0 已覆盖从源码发现到前端交付的完整链路。</p>
+              <div class="mt-4 grid gap-3 sm:grid-cols-2">
+                <div class="rounded-xl border border-slate-200 bg-white p-4 dark:border-white/[0.08] dark:bg-white/[0.025]"><p class="!mt-0 text-[12px] font-semibold text-slate-800 dark:text-slate-100">源码扫描</p><p class="!mt-1 text-[11px]">解析 Spring Boot Controller、方法、路径、参数、DTO、Javadoc 与校验注解。</p></div>
+                <div class="rounded-xl border border-slate-200 bg-white p-4 dark:border-white/[0.08] dark:bg-white/[0.025]"><p class="!mt-0 text-[12px] font-semibold text-slate-800 dark:text-slate-100">接口资产</p><p class="!mt-1 text-[11px]">模块 / 包 / 手工目录组织，支持搜索、方法筛选、候选确认和人工校正。</p></div>
+                <div class="rounded-xl border border-slate-200 bg-white p-4 dark:border-white/[0.08] dark:bg-white/[0.025]"><p class="!mt-0 text-[12px] font-semibold text-slate-800 dark:text-slate-100">本地调试</p><p class="!mt-1 text-[11px]">按环境发送请求，编辑 Path、Query、Header、Body、Cookie，查看响应与耗时。</p></div>
+                <div class="rounded-xl border border-slate-200 bg-white p-4 dark:border-white/[0.08] dark:bg-white/[0.025]"><p class="!mt-0 text-[12px] font-semibold text-slate-800 dark:text-slate-100">用例沉淀</p><p class="!mt-1 text-[11px]">冻结请求快照、响应示例、标签与备注，支持复用和交接。</p></div>
+                <div class="rounded-xl border border-slate-200 bg-white p-4 dark:border-white/[0.08] dark:bg-white/[0.025]"><p class="!mt-0 text-[12px] font-semibold text-slate-800 dark:text-slate-100">文档导出</p><p class="!mt-1 text-[11px]">项目接口文档与单接口 Markdown，支持筛选、复制、导出和渐进加载。</p></div>
+                <div class="rounded-xl border border-slate-200 bg-white p-4 dark:border-white/[0.08] dark:bg-white/[0.025]"><p class="!mt-0 text-[12px] font-semibold text-slate-800 dark:text-slate-100">AI 可选协作</p><p class="!mt-1 text-[11px]">字段说明 Diff、候选用例、分批判量文档；API Key 仅保存在本机。</p></div>
+              </div>
+            </section>
+
+            <!-- ================= 使用流程 ================= -->
+            <section id="workflow">
+              <h2>使用流程</h2>
+              <ol>
+                <li><strong>新建项目</strong>：选择本地 Spring Boot 源码目录。</li>
+                <li><strong>扫描代码</strong>：确认 Controller 候选，逐项处理 diff 后入库。</li>
+                <li><strong>配置环境</strong>：设置前置 URL、全局参数、TLS、代理与超时。</li>
+                <li><strong>调试接口</strong>：编辑参数，发送请求，查看响应、耗时和大小。</li>
+                <li><strong>保存用例</strong>：冻结请求快照，补充标签、备注和响应示例。</li>
+                <li><strong>导出交付</strong>：生成 Markdown；需要时按标签交给 AI 整理。</li>
+              </ol>
+            </section>
+
+            <!-- ================= 功能详解 ================= -->
+            <section id="scan">
+              <h2>源码扫描</h2>
+              <p>扫描只读取源码文件，不执行源码。解析过程在独立 <code>worker_threads</code> 中运行，主进程负责进度、取消和结果入库。</p>
+              <ul>
+                <li>识别 Controller 类、请求方法、路径、参数和返回类型；</li>
+                <li>解析 DTO、Javadoc、校验注解和嵌套字段；</li>
+                <li>扫描结果以候选 diff 呈现，确认后才进入资产目录；</li>
+                <li>人工修改会保留，不会在下次扫描中被静默覆盖。</li>
+              </ul>
+              <figure class="docs-shot">
+                <img src="../docs/design/assets/scan-diff.png" alt="FeelPost 扫描候选 diff 确认" width="2720" height="1760" loading="lazy" />
+                <figcaption>扫描候选项逐条确认；人工校正会保留，不会被下次扫描覆盖。</figcaption>
+              </figure>
+            </section>
+
+            <section id="catalog">
+              <h2>接口资产</h2>
+              <p>接口按模块、包和手工目录组织。除了源码扫描，也可以创建手工接口，适合网关、外部服务或还没写进 Spring Boot 的接口。</p>
+              <ul>
+                <li>接口树、搜索、方法筛选和目录快捷操作；</li>
+                <li>接口详情、请求方式 / 路径编辑、标签和备注；</li>
+                <li>候选变更逐项确认，人工校正层与扫描结果分开保存；</li>
+                <li>接口 Tab 支持右键关闭，适合同时打开多个接口。</li>
+              </ul>
+            </section>
+
+            <section id="environment">
+              <h2>环境与调试</h2>
+              <h3>环境管理</h3>
+              <p>每个项目可以配置多套环境。环境支持前置 URL、全局参数、TLS、代理和超时，并提供参数合并后的生效预览。</p>
+              <h3>请求面板</h3>
+              <p>支持 Path、Query、Header、Body、Cookie 编辑和请求取消。响应区展示状态码、耗时、大小、响应头与响应体，并可保存为响应示例。</p>
+              <div class="callout"><strong>安全提示：</strong>请求会真实发送到配置的目标地址。发送前请确认当前环境和敏感 Header / Cookie。</div>
+              <figure class="docs-shot">
+                <img src="../docs/design/assets/hjpz.png" alt="FeelPost 环境与参数配置" width="2720" height="1760" loading="lazy" />
+                <figcaption>环境配置与生效参数预览。</figcaption>
+              </figure>
+            </section>
+
+            <section id="cases">
+              <h2>用例管理</h2>
+              <p>把一次调通的结果冻结成用例，保留请求快照、响应示例、标签和备注。用例是后续导出和 AI 整理的输入。</p>
+              <ul>
+                <li>按接口、标签和关键字检索；</li>
+                <li>用例详情支持复制、删除和按标签批量删除；</li>
+                <li>响应示例变化时，相关 AI 缓存会失效；</li>
+                <li>普通导出和 AI 导出均以标签作为范围。</li>
+              </ul>
+              <figure class="docs-shot">
+                <img src="../docs/design/assets/cases-workspace.png" alt="FeelPost 用例工作台" width="2720" height="1760" loading="lazy" />
+                <figcaption>用例工作台：请求快照、响应示例、标签与批量操作。</figcaption>
+              </figure>
+            </section>
+
+            <section id="documents">
+              <h2>文档导出</h2>
+              <p>文档页按接口生成 Markdown，可选择接口范围、预览、查看源码、复制或导出。接口较多时采用渐进加载，避免一次性渲染全部内容。</p>
+              <ul>
+                <li>项目接口文档与单接口导出；</li>
+                <li>按模块 / 标签筛选，支持搜索；</li>
+                <li>字段说明包含请求体、响应 JSON 的字段路径、类型、示例和手工说明；</li>
+                <li>AI 用例文档可以按接口分批，多个 Markdown 合并导出。</li>
+              </ul>
+              <figure class="docs-shot">
+                <img src="../docs/design/assets/docs-workspace.png" alt="FeelPost Markdown 文档工作台" width="2720" height="1704" loading="lazy" />
+                <figcaption>文档工作台：筛选、预览、源码和 Markdown 导出。</figcaption>
+              </figure>
+            </section>
+
+            <section id="ai">
+              <h2>AI 协作（可选）</h2>
+              <p>FeelPost 使用 OpenAI-compatible 接口，支持 DeepSeek、通义千问、智谱 GLM、Kimi、MiniMax、Ollama、OpenAI、Anthropic Claude、Google Gemini、OpenRouter 和自定义兼容接口。</p>
+              <ul>
+                <li><strong>字段说明</strong>：流式生成请求 / 响应字段说明，先展示 Diff，再选择性应用；</li>
+                <li><strong>AI 用例</strong>：根据接口契约生成候选用例，预览、调整标签后导入当前环境；</li>
+                <li><strong>AI 用例文档</strong>：按接口分批、上下文超限拆分、缓存复用、失败批次重试；</li>
+                <li><strong>安全</strong>：API Key 使用系统安全存储，只保存在本机；发送前剔除敏感 Header、Cookie 和查询参数；</li>
+                <li><strong>默认关闭</strong>：不配置 AI 不影响扫描、调试、用例和普通 Markdown 导出。</li>
+              </ul>
+              <figure class="docs-shot">
+                <img src="../docs/design/assets/ai.png" alt="FeelPost AI 字段说明与文档协作" width="2720" height="1760" loading="lazy" />
+                <figcaption>AI 字段说明与文档协作：结果先预览，不自动写入接口资产。</figcaption>
+              </figure>
+            </section>
+
+            <section id="data">
+              <h2>本地数据与隐私</h2>
+              <p>默认数据目录为 <code>~/Documents/feelpost</code>，可以通过 <code>FEELPOST_DATA_DIR</code> 环境变量覆盖。数据全部是本地 JSON 文件，可以直接备份或迁移。</p>
+              <ul>
+                <li>无账号系统、云同步或远程遥测；</li>
+                <li>项目、接口、环境、用例、响应示例均保存在本机；</li>
+                <li>扫描只读取源码，不执行源码；</li>
+                <li>AI 是可选能力，配置和 Key 不离开本机。</li>
+              </ul>
+            </section>
+
+            <section id="install">
+              <h2>下载安装</h2>
+              <p>从 <a href="https://github.com/smileemile/feelpost/releases" target="_blank" rel="noreferrer">GitHub Releases</a> 下载对应平台安装包：</p>
+              <ul>
+                <li>macOS：<code>.dmg</code>（Apple Silicon / Intel）；</li>
+                <li>Windows：NSIS 安装包 <code>.exe</code>；</li>
+                <li>Windows Portable：免安装 <code>.exe</code>。</li>
+              </ul>
+              <p>当前安装包未做代码签名，首次运行可能被系统提示。正式分发前需要补充签名和公证。</p>
+              <h3>从源码运行</h3>
+              <pre class="code-scroll"><code>git clone https://github.com/smileemile/feelpost.git
+cd feelpost
+npm install
+npm run dev</code></pre>
+              <p>需要 Node.js 20 或更高版本，支持 macOS 和 Windows。构建命令：</p>
+              <pre class="code-scroll"><code>npm run dist:mac:arm64   # macOS .dmg
+npm run dist:win         # Windows .exe</code></pre>
+            </section>
+
+            <section id="faq">
+              <h2>常见问题</h2>
+              <h3>使用 FeelPost 必须联网吗？</h3>
+              <p>不需要。扫描、调试、用例和普通 Markdown 导出都在本地完成。只有主动使用 AI 功能时，才需要连接你配置的模型服务商。</p>
+              <h3>扫描会修改我的 Spring Boot 源码吗？</h3>
+              <p>不会。扫描只读取源码文件，不执行源码，也不会写回项目目录。</p>
+              <h3>可以管理没有源码的接口吗？</h3>
+              <p>可以。接口资产支持手工接口，适合网关、外部服务或尚未写入 Spring Boot 的接口。</p>
+              <h3>数据保存在哪里？</h3>
+              <p>默认在 <code>~/Documents/feelpost</code>，可以通过 <code>FEELPOST_DATA_DIR</code> 修改。所有数据都是本地 JSON 文件。</p>
+              <h3>安装包为什么提示“未签名”？</h3>
+              <p>当前 v0.1.0 是内部 Alpha 版本，尚未完成 macOS 公证和 Windows 代码签名。首次运行需要按系统提示确认。</p>
+              <h3>如何反馈问题？</h3>
+              <p>到 <a href="https://github.com/smileemile/feelpost/issues" target="_blank" rel="noreferrer">GitHub Issues</a> 提交问题，或直接发起 PR。文档也会随版本持续更新。</p>
+            </section>
+          </div>
+
+          <div class="mt-12 flex flex-col items-start justify-between gap-4 border-t border-slate-200 pt-6 text-[11px] text-slate-400 sm:flex-row sm:items-center dark:border-white/[0.08]">
+            <span>最后更新于 2026-11-27 · FeelPost v0.1.0</span>
+            <div class="flex gap-4"><a href="../index.html" class="hover:text-brand-600 dark:hover:text-brand-400">返回官网</a><a href="https://github.com/smileemile/feelpost/issues" target="_blank" rel="noreferrer" class="hover:text-brand-600 dark:hover:text-brand-400">反馈文档问题 ↗</a></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <footer class="border-t border-slate-200/70 dark:border-white/[0.07]">
+    <div class="mx-auto flex max-w-7xl flex-col gap-5 px-6 py-7 text-[11px] text-slate-500 sm:flex-row sm:items-center sm:justify-between lg:px-8 dark:text-slate-400">
+      <div class="flex items-center gap-2.5"><img src="../resources/icon.svg" alt="" class="h-7 w-7" /><div><p class="text-[12px] font-semibold text-slate-700 dark:text-slate-200">FeelPost</p><p class="text-[10px] text-slate-400">开源 · 本地 · AI 协作的 API 接口测试工具</p></div></div>
+      <nav class="flex flex-wrap gap-x-5 gap-y-2" aria-label="页脚导航">
+        <a href="../index.html" class="hover:text-slate-900 dark:hover:text-white">官网</a>
+        <a href="https://github.com/smileemile/feelpost" target="_blank" rel="noreferrer" class="hover:text-slate-900 dark:hover:text-white">GitHub</a>
+        <a href="../index.html#support" class="hover:text-slate-900 dark:hover:text-white">打赏</a>
+        <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noreferrer" class="hover:text-slate-900 dark:hover:text-white">MIT License</a>
+        <span>© <span id="copyright-year">2026</span> FeelPost</span>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.getElementById('site-header')
+    const toast = document.getElementById('toast')
+    let toastTimer
+    const themeToggle = document.getElementById('theme-toggle')
+    const mobileButton = document.getElementById('mobile-menu-button')
+    const mobileMenu = document.getElementById('mobile-menu')
+
+    function showToast(message) {
+      toast.textContent = message
+      toast.classList.add('show')
+      clearTimeout(toastTimer)
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2400)
+    }
+    function applyTheme(theme) {
+      document.documentElement.classList.toggle('dark', theme === 'dark')
+    }
+    themeToggle.addEventListener('click', () => {
+      const next = document.documentElement.classList.contains('dark') ? 'light' : 'dark'
+      localStorage.setItem('feelpost-theme', next)
+      applyTheme(next)
+    })
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
+    systemTheme.addEventListener('change', (event) => {
+      if (!localStorage.getItem('feelpost-theme')) applyTheme(event.matches ? 'dark' : 'light')
+    })
+    function closeMobileMenu() {
+      mobileMenu.classList.add('hidden')
+      mobileButton.setAttribute('aria-expanded', 'false')
+      mobileButton.querySelector('.menu-icon').classList.remove('hidden')
+      mobileButton.querySelector('.close-icon').classList.add('hidden')
+    }
+    mobileButton.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('hidden') === false
+      mobileButton.setAttribute('aria-expanded', String(open))
+      mobileButton.querySelector('.menu-icon').classList.toggle('hidden', open)
+      mobileButton.querySelector('.close-icon').classList.toggle('hidden', !open)
+    })
+    mobileMenu.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMobileMenu))
+    document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeMobileMenu() })
+
+    const tocLinks = [...document.querySelectorAll('.toc-link')]
+    const tocSections = tocLinks
+      .map((link) => document.querySelector(link.getAttribute('href')))
+      .filter(Boolean)
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)
+      if (!visible.length) return
+      const id = '#' + visible[0].target.id
+      tocLinks.forEach((link) => link.classList.toggle('active', link.getAttribute('href') === id))
+    }, { rootMargin: '-96px 0px -65% 0px', threshold: [0, .15, .5] })
+    tocSections.forEach((section) => observer.observe(section))
+    tocLinks.forEach((link) => link.addEventListener('click', () => {
+      const details = link.closest('details')
+      if (details) details.removeAttribute('open')
+    }))
+
+    // Header download menu: same behavior and latest-release lookup as the landing page.
+    const GITHUB_REPO = 'smileemile/feelpost'
+    const GITHUB_URL = `https://github.com/${GITHUB_REPO}`
+    const RELEASES_URL = `${GITHUB_URL}/releases/latest`
+    const RELEASES_INDEX = `${GITHUB_URL}/releases`
+    const downloadToggles = [...document.querySelectorAll('[data-download-toggle]')]
+    function closeDownloadMenus(except) {
+      downloadToggles.forEach((toggle) => {
+        const root = toggle.closest('[data-download-root]')
+        const menu = root && root.querySelector('[data-download-menu]')
+        if (!menu || menu === except) return
+        menu.classList.add('hidden')
+        toggle.setAttribute('aria-expanded', 'false')
+      })
+    }
+    downloadToggles.forEach((toggle) => {
+      const root = toggle.closest('[data-download-root]')
+      const menu = root && root.querySelector('[data-download-menu]')
+      if (!menu) return
+      toggle.addEventListener('click', (event) => {
+        event.stopPropagation()
+        const willOpen = menu.classList.contains('hidden')
+        closeDownloadMenus(menu)
+        menu.classList.toggle('hidden', !willOpen)
+        toggle.setAttribute('aria-expanded', String(willOpen))
+      })
+      menu.addEventListener('click', () => closeDownloadMenus())
+    })
+    document.addEventListener('click', (event) => {
+      if (!event.target.closest('[data-download-root]')) closeDownloadMenus()
+    })
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeDownloadMenus()
+    })
+
+    async function fetchJson(url, timeout) {
+      const controller = new AbortController()
+      const timer = setTimeout(() => controller.abort(), timeout)
+      try {
+        const response = await fetch(url, { cache: 'no-store', signal: controller.signal, headers: { Accept: 'application/vnd.github+json' } })
+        if (!response.ok) return null
+        return await response.json()
+      } catch (error) {
+        return null
+      } finally {
+        clearTimeout(timer)
+      }
+    }
+    function normalizeRelease(release) {
+      const tag = String(release.tag_name || release.tag || '').trim()
+      if (!tag) return null
+      return {
+        tag_name: tag,
+        html_url: release.html_url || RELEASES_INDEX,
+        assets: Array.isArray(release.assets) ? release.assets.map((asset) => ({ name: asset.name || '', browser_download_url: asset.browser_download_url || '' })) : []
+      }
+    }
+    function releaseAssetUrl(tag, suffix) {
+      return `${GITHUB_URL}/releases/download/${tag}/FeelPost-${tag.replace(/^v/i, '')}-${suffix}`
+    }
+    function applyRelease(release) {
+      if (!release || !release.tag_name) return
+      const tag = release.tag_name
+      const assets = release.assets || []
+      const findAsset = (pattern) => {
+        const match = assets.find((asset) => pattern.test(asset.name))
+        return match ? match.browser_download_url : null
+      }
+      const urls = {
+        'mac-arm64': findAsset(/arm64[^/]*\.dmg$/i) || releaseAssetUrl(tag, 'arm64.dmg'),
+        'mac-x64': findAsset(/x64[^/]*\.dmg$/i) || releaseAssetUrl(tag, 'x64.dmg'),
+        'win-x64': findAsset(/x64[^/]*Setup\.exe$/i) || findAsset(/Setup\.exe$/i) || releaseAssetUrl(tag, 'x64-Setup.exe'),
+        'win-portable': findAsset(/Portable\.exe$/i) || releaseAssetUrl(tag, 'x64-Portable.exe'),
+        'all': RELEASES_INDEX
+      }
+      document.querySelectorAll('[data-download]').forEach((link) => {
+        const url = urls[link.getAttribute('data-download')]
+        if (url) link.href = url
+      })
+      document.querySelectorAll('[data-release-version]').forEach((element) => { element.textContent = tag })
+    }
+    async function loadLatestRelease() {
+      const release = await fetchJson(`https://api.github.com/repos/${GITHUB_REPO}/releases/latest`, 6000)
+      if (release) {
+        const normalized = normalizeRelease(release)
+        if (normalized) { applyRelease(normalized); return }
+      }
+      const badge = await fetchJson(`https://img.shields.io/github/v/release/${GITHUB_REPO}.json`, 6000)
+      const tag = badge && badge.message && /^v?\d/.test(String(badge.message)) ? String(badge.message) : null
+      if (tag) applyRelease({ tag_name: tag, html_url: RELEASES_INDEX, assets: [] })
+    }
+
+    const copyright = document.getElementById('copyright-year')
+    if (copyright) copyright.textContent = new Date().getFullYear()
+    loadLatestRelease()
+    applyTheme(localStorage.getItem('feelpost-theme') === 'dark' || (!localStorage.getItem('feelpost-theme') && systemTheme.matches) ? 'dark' : 'light')
+  </script>
+</body>
+</html>
